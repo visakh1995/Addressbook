@@ -4,6 +4,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <script src="../scripts/script.js"></script>
+
     </head>
     <body>
         <div class="navbar">

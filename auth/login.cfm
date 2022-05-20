@@ -6,15 +6,27 @@
                 <!--- <img src=""> --->
             </div>
             <div class="addressbook-form-fields">
-                <form>
+                <div id="alert"></div>
+                <form method="post" action="../components/userdefined.cfc?method=addressBookLogin">
                     <h1>LOGIN</h1>
+                    <cfif isDefined("aMessages")>
+                        <div class="alertClass">
+                            <cfoutput>
+                                <p>#aMessages#</p>
+                            </cfoutput>
+                        </div>
+                    </cfif>
                     <div class="form-control">
-                        <input type="text" name ="username" placeholder="Username">
+                        <input type="text" name ="userName" id ="userName" 
+                        placeholder="Username" required>
                     </div>
                     <div class="form-control">
-                        <input type="password" name ="password" placeholder="Password">
+                        <input type="password" name ="password" id ="password" 
+                        placeholder="Password" required>
                     </div>
-                    <button class="btn btn-outline btn-login" type="submit">Login</button>
+                    <button class="btn btn-outline btn-login" type="submit"
+                        onclick ="return onAddressBookLoginValidate()">Login
+                    </button>
                     <div class="addressbook-form-footer my-4">
                         <p>Or Sign In Using fb or insta</p>
                         <p>Dont have an account?<span><a href="signup.cfm">Register here</a></span></p>

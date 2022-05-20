@@ -81,7 +81,7 @@ img{
 .addressbook-form .form-control {
     padding:30px 0;
 }
-.addressbook-form input[type="text"],[type="password"]{
+.addressbook-form input[type="text"],[type="password"],[type="email"]{
     border:0;
     border-bottom: 1px solid #b4becb;
     width:100%;
@@ -160,8 +160,22 @@ button.btn.btn-signup{
     margin-top: 10px;
     color:#047ade;
 }
-
-
+#alert{
+    background-color: red;
+    border-radius:5px;
+    color:#fff;
+    font-size:16px;
+    text-align:center;
+    font-weight:900;
+}
+.alertClass{
+    background-color: red;
+    border-radius:5px;
+    color:#fff;
+    font-size:16px;
+    text-align:center;
+    font-weight:900;
+}
 
 /* margin */
 .my-1{
