@@ -38,10 +38,10 @@
             <cfparam name="arguments.confirmPassword" default="">
 
             <!--- email and username validation starts--->
-            <cfquery name="emailVerify" datasource="cruddb">
+            <cfquery name="emailVerify">
                 SELECT *FROM coldfusiion.addressbook_register WHERE emailId = "#arguments.emailId#";
             </cfquery>
-            <cfquery name="userNameVerify" datasource="cruddb">
+            <cfquery name="userNameVerify">
                 SELECT *FROM coldfusiion.addressbook_register WHERE userName = "#arguments.userName#";
             </cfquery>
             <cfif emailVerify.RecordCount neq 0>
@@ -54,7 +54,7 @@
             </cfif> 
             <!--- email and username validation ends--->
 
-            <cfquery name="addData" result = result  datasource="cruddb">
+            <cfquery name="addData" result = result >
                 INSERT INTO coldfusiion.addressbook_register(fullName,emailId,userName,password,status)
                 VALUES(
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.fullName#">,
@@ -65,7 +65,7 @@
                 )
             </cfquery>
             <cfset local.message  ="Application submitted successfully">
-            <cflocation  url="../auth/signup.cfm?aMessages=#local.aErrorMessages#">   
+            <cflocation  url="../auth/signup.cfm?aMessageSuccess=#local.message#">   
         </cfif>
     
     </cffunction>
@@ -73,7 +73,7 @@
     <cffunction  name="addressBookLogin" access="remote" output="true" returnType="string">
         <cfargument  name="userName" type="string" required="yes">
         <cfargument  name="password" type="string" required="yes">
-        <cfquery name="verifiedDetails" datasource="cruddb">
+        <cfquery name="verifiedDetails">
             SELECT *FROM coldfusiion.addressbook_register WHERE 
             userName = <cfqueryparam CFSQLType="cf_sql_varchar" value ="#arguments.userName#"> AND 
             password = <cfqueryparam CFSQLType="cf_sql_varchar" value ="#arguments.password#">
@@ -90,11 +90,15 @@
                 <cfset Session.addressBookCredentials["password"] = "#verifiedDetails.password#">
                 <cfset Session.addressBookCredentials["isAuthenticated"] = "True">
             </cfif>
-            <cflocation  url=".../auth/dashboard.cfm"> 
+            <cflocation  url="../pages/dashboard.cfm"> 
         <cfelse>
             <cfset local.message  ="Invalid username or password">
             <cflocation  url="../auth/login.cfm?aMessages=#local.message#">  
         </cfif>
+    </cffunction>
 
+    <cffunction name="loggedOut" access="remote" output="true">
+        <cfset StructDelete(Session, "addressBookCredentials")>
+        <cflocation  url="../auth/login.cfm">
     </cffunction>
 </cfcomponent>

@@ -11,12 +11,21 @@
         <div class="navbar">
             <div class="container flex">
                 <h2>ADDRESS BOOK</h2>
-                <nav>
-                    <ul>
-                        <li><a href="signup.cfm">Signup</a></li>
-                        <li><a href="login.cfm">Login</a></li>
-                    </ul>
-                </nav>
+                <cfif structKeyExists(Session,"addressBookCredentials")>
+                    <nav>
+                        <ul>
+                            <li><a href="../components/userdefined.cfc?method=loggedOut">Logout</a></li>
+                        </ul>
+                    </nav>
+                <cfelse>
+                    <nav>
+                        <ul>
+                            <li><a href="signup.cfm">Signup</a></li>
+                            <li><a href="login.cfm">Login</a></li>
+                        </ul>
+                    </nav>
+                </cfif>
+
             </div>
         </div>
 
