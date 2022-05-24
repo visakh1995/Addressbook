@@ -163,6 +163,11 @@ tr:nth-child(even) {
     justify-content: center;
     align-items: center;
 }
+.modal-body-inclusive{
+    display:flex;
+    justify-content:space-evenly;
+    align-items: center;
+}
 .modal-body-bon{
     display:flex;
     justify-content: flex-start;
@@ -180,14 +185,21 @@ tr:nth-child(even) {
 .modal-body .form-control {
     padding:30px 0;
 }
-.modal-body input[type="text"],[type="password"],[type="email"]{
+.modal-body input[type="text"],[type="password"],[type="email"],[type="date"]{
     border:0;
     border-bottom: 1px solid #b4becb;
     width:80%;
     padding:3px;
     font-size: 16px;
 }
-.modal-body input:focus {
+.modal-body-inclusive input[type="text"]{
+    border:0;
+    border-bottom: 1px solid #b4becb;
+    width:80%;
+    padding:3px;
+    font-size: 16px;
+}
+.modal-body input:focus,.modal-body-inclusive input:focus {
     outline: none;
 }
 .modal-btn{
@@ -206,8 +218,22 @@ tr:nth-child(even) {
 .modal-body-bon input:focus {
     outline: none;
 }
-.checks{
-    margin-right: 50px;;
+.form-control.dob {
+    margin-left: 85px;
+}
+.form-control.photo {
+    width: 200px;
+}
+.fullWidth{
+    border:0;
+    border-bottom: 1px solid #b4becb;
+    width:80%;
+    padding:3px;
+    font-size: 16px;
+    margin-right: 88px;
+}
+.fullWidth:focus{
+    outline:none;
 }
 
 /* uttilities */

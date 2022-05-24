@@ -22,21 +22,35 @@ function onAddressBookContactValidate(){
   var title = document.getElementById("title").value;
   var firstName = document.getElementById("firstName").value;
   var lastName = document.getElementById("lastName").value;
-  var gender = document.getElementById("gender").value;
   var dob = document.getElementById("dob").value;
   var photo = document.getElementById("photo").value;
   var address = document.getElementById("address").value;
   var pinCode = document.getElementById("pinCode").value;
   var street = document.getElementById("street").value;
   var phone = document.getElementById("phone").value;
+  var yes = document.getElementById("yes").value;
+  var no = document.getElementById("no").value;
 
-  if(title == "" ||  firstName == "" || lastName == "" || gender =="" || dob =="" || 
-  photo == "" ||address == "" ||pinCode == "" ||street == "" ||email == "" ||phone == "") {
-    document.getElementById("alert").innerHTML ="Please fill all fields";
+  if(title == "" ||  firstName == "" || lastName == "" ||  dob =="" || 
+    photo == "" ||address == "" ||pinCode == "" ||street == "" ||email == "" ||phone == "") {
+      document.getElementById("alert").innerHTML ="Please fill all required fields";
+      return false;
+    }
+  if(!isNaN(firstName) || !isNaN(lastName) ) {
+    document.getElementById("alert").innerHTML ="Name field cant allow numbers";
     return false;
   }
-
-
+  if(isNaN(pinCode)) {
+    document.getElementById("alert").innerHTML ="Invalid pincode";
+    return false;
+  }
+  var phoneNum = phone.replace(/[^\d]/g, '');
+    if(phoneNum.length > 6 && phoneNum.length < 11) { 
+    return true;
+  }else{
+    document.getElementById("alert").innerHTML ="please provide valid phone number";
+    return false;
+  } 
 }
 
 function onAddressBookTriggerContact(){
