@@ -196,10 +196,13 @@
             <cfset local.message  ="Contact created successfully">
             <cflocation  url="../pages/dashboard.cfm?aMessageSuccess=#local.message#"> 
         </cfif>
+    </cffunction>
 
-
-
-
+    <cffunction  name="listContacts" access="remote">
+        <cfquery name="list">
+            SELECT * FROM coldfusiion.addressbook_contacts
+        </cfquery>
+        <cfreturn list>
     </cffunction>
 
     

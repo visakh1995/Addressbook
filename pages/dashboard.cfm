@@ -1,5 +1,7 @@
 <cfinclude template="../section/header.cfm">
 <cfinclude template ="./modal.cfm">
+<cfset newAddressInstance = createObject("component","ADDRESSBOOK/components.userdefined")> 
+<cfset contactDirectory = newAddressInstance.listContacts()> 
 <section class="dashboard">
     <div class="container-2">
         <div class="dashboard-topbar grids">
@@ -27,44 +29,29 @@
                       </cfoutput>
                   </div>
               </cfif>
-                <table>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <cfoutput query = contactDirectory>
                     <tr>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
-                      <th>Status</th>
-                    </tr>
-                    <tr>
-                      <td>Alfreds Futterkiste</td>
-                      <td>Maria Anders</td>
-                      <td>Germany</td>
+                      <td><a href="pageDetails.cfm?detailsID=#id#">#firstName#</a></td>
+                      <td>#email#</td>
+                      <td>#phone#</td>
                       <td>
-                        <button class="btn btn-outline"><a href="">edit</a></button>
-                        <button class="btn btn-outline"><a href="">delete</a></button>
-                        <button class="btn btn-outline"><a href="">view</a></button>
+                        <button class="btn btn-outline"><a href="update.cfm?ID=#id#">edit</a></button>
+                        <button class="btn btn-outline"><a href="action.cfm?DELETE=#id#">delete</a></button>
                       </td>
                     </tr>
-                    <tr>
-                      <td>Centro comercial Moctezuma</td>
-                      <td>Francisco Chang</td>
-                      <td>Mexico</td>
-                      <td>
-                        <button class="btn btn-outline"><a href="">edit</a></button>
-                        <button class="btn btn-outline"><a href="">delete</a></button>
-                        <button class="btn btn-outline"><a href="">view</a></button>
-                      </td>
-                    </tr>
-                    <tr>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Maria Anders</td>
-                        <td>Germany</td>
-                        <td>
-                            <button class="btn btn-outline"><a href="">edit</a></button>
-                            <button class="btn btn-outline"><a href="">delete</a></button>
-                            <button class="btn btn-outline"><a href="">view</a></button>
-                          </td>
-                      </tr>
-                  </table>
+                  </cfoutput>
+                </tbody>
+              </table>
             </div>
         </div>
     </div>
