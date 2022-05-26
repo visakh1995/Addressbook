@@ -172,13 +172,15 @@
             <cfparam name="arguments.phone" default="">
             <cfparam name="arguments.checks" default="">
             <cfparam name="imageValue" default="">
+            <cfparam name="arguments.status" default="1">
+
             <cfparam name="Session.addressBookCredentials.id" default="Not Authenticated">
     
             <cfquery name="addData" result = result>
-                INSERT INTO coldfusiion.addressbook_contacts(userId,title,firstName,lastName,email,gender,dob,
+                INSERT INTO coldfusiion.adbookcontacts(userId,title,firstName,lastName,email,gender,dob,
                 photo,address,phone,street,pincode,status)
                 VALUES(
-                    <cfqueryparam  CFSQLType="cf_sql_integer" value="#Session.addressBookCredentials.id#">,
+                    <cfqueryparam  CFSQLType="cf_sql_integer" value="2">,
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.title#">,
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.firstName#">,
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.lastName#">,
@@ -190,7 +192,7 @@
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.phone#">,
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.street#">,
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.pinCode#">,
-                    <cfqueryparam  CFSQLType="cf_sql_integer" value="1">
+                    <cfqueryparam  CFSQLType="cf_sql_integer" value="3">
                 )
             </cfquery>
             <cfset local.message  ="Contact created successfully">
