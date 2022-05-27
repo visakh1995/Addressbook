@@ -180,7 +180,7 @@
                 INSERT INTO coldfusiion.adbookcontacts(userId,title,firstName,lastName,email,gender,dob,
                 photo,address,phone,street,pincode,status)
                 VALUES(
-                    <cfqueryparam  CFSQLType="cf_sql_integer" value="2">,
+                    <cfqueryparam  CFSQLType="cf_sql_integer" value="#Session.addressBookCredentials.id#">,
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.title#">,
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.firstName#">,
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.lastName#">,
@@ -207,6 +207,63 @@
         <cfreturn list>
     </cffunction>
 
-    
+    <cffunction name="addressBookDelete" access="remote">
+        <cfargument name="deleteId" type="string" required="yes">
+        <cfquery name="deleteData">
+            DELETE FROM coldfusiion.adbookcontacts WHERE 
+            contactId = <cfqueryparam  CFSQLType = "cf_sql_integer" value="#arguments.deleteId#">
+        </cfquery>
+        <cfset local.message  ="Contact deleted successfully">
+        <cflocation  url="./pages/dashboard.cfm?aMessages=#local.message#"> 
+    </cffunction>
+
+    <cffunction name="addressBookUpdateContactForm" access="remote">
+        <cfargument name="contactId" type="string" required="true">
+        <cfargument name="title" type="string" required="true">
+        <cfargument name="firstName" type="string" required="true">
+        <cfargument name="lastName" type="string" required="true">
+        <cfargument name="email" type="string" required="true">
+        <cfargument name="dob" type="string" required="true">
+        <cfargument name="photo" type="string" required="true">
+        <cfargument name="address" type="string" required="true">
+        <cfargument name="pinCode" type="string" required="true">
+        <cfargument name="street" type="string" required="true">
+        <cfargument name="phone" type="string" required="true">
+        <cfargument name="checks" type="string" required="true">
+
+        <cfparam name="arguments.title" default="">
+        <cfparam name="arguments.firstName" default="">
+        <cfparam name="arguments.lastName" default="">
+        <cfparam name="arguments.email" default="">
+        <cfparam name="arguments.password" default="">
+        <cfparam name="arguments.dob" default="">
+        <cfparam name="arguments.address" default="">
+        <cfparam name="arguments.pinCode" default="">
+        <cfparam name="arguments.street" default="">
+        <cfparam name="arguments.phone" default="">
+        <cfparam name="arguments.checks" default="">
+        <cfparam name="arguments.photo" default="imageValue">
+        <cfparam name="arguments.status" default="1">
+
+        <cfquery name="updateData">
+           UPDATE coldfusiion.adbookcontacts SET 
+            userId = <cfqueryparam  CFSQLType="cf_sql_integer" value="#Session.addressBookCredentials.id#">,
+            title = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.title#">,
+            firstName = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.firstName#">,
+            lastName  = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.lastName#">,
+            email =<cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.email#">,
+            gender = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.checks#">,
+            dob = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.dob#">,
+            photo = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.photo#">,
+            address = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.address#">,
+            phone = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.phone#">,
+            street = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.street#">,
+            pinCode = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.pinCode#">,
+            status = <cfqueryparam  CFSQLType="cf_sql_integer" value="1">
+            WHERE contactId = "#arguments.contactId#"
+        </cfquery>
+        <cfset local.message  ="Contact updated successfully">
+        <cflocation  url="./pages/dashboard.cfm?aMessages=#local.message#"> 
+    </cffunction>
 
 </cfcomponent>

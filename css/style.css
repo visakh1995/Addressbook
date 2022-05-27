@@ -235,6 +235,13 @@ tr:nth-child(even) {
 .fullWidth:focus{
     outline:none;
 }
+/* view modal */
+h4.view-modal-title {
+    text-align: center;
+}
+.modal-titles p{
+    font-size: 15px;;
+}
 
 /* uttilities */
 .container{

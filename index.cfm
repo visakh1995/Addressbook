@@ -10,7 +10,7 @@
 
         <table>
             <thead>
-              <tr>
+              <tr>€
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>

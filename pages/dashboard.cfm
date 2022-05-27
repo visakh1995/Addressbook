@@ -25,114 +25,180 @@
                   </div>
                 </cfif>
                 <cfif isDefined("aMessages")>
-                  <div class="alertClass">
+                    <div class="alertClass">
                       <cfoutput>
                           <p>#aMessages#</p>
                       </cfoutput>
-                  </div>
-              </cfif>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <cfoutput>
-                    <cfloop array ="#contactDirectory#" index="directory">
+                    </div>
+                </cfif>
+                <table>
+                    <thead>
                         <tr>
-                            <td>#directory.firstName#</td>
-                            <td>#directory.email#</td>
-                            <td>#directory.phone#</td>
-                            <td>
-                              <button class="btn btn-outline" data-toggle="modal" 
-                                    data-target=".viewModal-#directory.id#">View
-                              </button>
-                              <button class="btn btn-outline"><a href="update.cfm?ID=#directory.id#">edit</a></button>
-                              <button class="btn btn-outline"><a href="action.cfm?DELETE=#directory.id#">delete</a></button>
-                            </td>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Status</th>
                         </tr>
-                    </cfloop>
-                  </cfoutput>
-                </tbody>
-              </table>
+                    </thead>
+                    <tbody>
+                        <cfoutput>
+                            <cfloop array ="#contactDirectory#" index="directory">
+                                <tr>
+                                    <td>#directory.firstName#</td>
+                                    <td>#directory.email#</td>
+                                    <td>#directory.phone#</td>
+                                    <td>
+                                        <button class="btn btn-outline" data-bs-toggle="modal" 
+                                            data-bs-target=".viewModal-#directory.id#">View
+                                        </button>
+                                        <button class="btn btn-outline" data-bs-toggle="modal" 
+                                            data-bs-target=".editModal-#directory.id#">edit
+                                        </button>
+                                        <button class="btn btn-outline">
+                                            <a href="../action.cfm?DELETE=#directory.id#">delete</a>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- The Modal -->
+                                <div class="modal viewModal-#directory.id#" >
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="view-modal-title">CONTACT DETAILS</h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body"> 
+                                                <div class="modal-container">
+                                                    <div class="modal-titles">
+                                                        <p>Name : #directory.firstName#</p>
+                                                    </div modal-titles>
+                                                    <div class="modal-titles">
+                                                        <p>Gender : #directory.gender#</p>
+                                                    </div>
+                                                    <div class="modal-titles">
+                                                        <p>Date of birth : #directory.dob#</p>
+                                                    </div>                 
+                                                    <div class="modal-titles">
+                                                        <p>Pincode : #directory.pinCode#</p>
+                                                    </div>
+                                                    <div class="modal-titles">
+                                                        <p>Email : #directory.email#</p>
+                                                    </div>
+                                                    <div class="modal-titles">
+                                                        <p>Phone : #directory.phone#</p>
+                                                    </div>
+                                                    <div class="modal-titles">
+                                                        <p>Address : #directory.address#</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" 
+                                                data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!---view modal ends here  --->
+                                <!-- The edit Modal -->
+                                <div class="modal editModal-#directory.id#" >
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="contact-list">
+                                                <div class="modal-container ">
+                                                    <div class="modal-head">
+                                                    <h2>Contact Details</h2>
+                                                    <div id="alert"></div>
+                                                </div>
+                                                <form class="my-4" method="post" enctype="multipart/form-data" 
+                                                    action="../components/userdefined.cfc?method=addressBookUpdateContactForm">
+                                                    <h2>Personal Contact</h2><hr>
+                                                    <div class="modal-body">
+                                                        <div class="form-control">
+                                                            <select  class="fullWidth" name = "title" id="title"> 
+                                                                <option value = "">--- Select ---</option> 
+                                                                <option value = "Mr">Mr</option> 
+                                                                <option value = "Mrs">Mrs</option>  
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-control">
+                                                            <input type="text" name ="firstName" 
+                                                            id ="firstName" value="#directory.firstName#" placeholder="First name*">
+                                                            <input type="hidden" name="contactId" value="#directory.id#">
+                                                        </div>
+                                                        <div class="form-control">
+                                                            <input type="text" name ="lastName" 
+                                                            id ="lastName" value="#directory.lastName#" placeholder="Last name*">
+                                                        </div>
+                                                    </div>
+                                    
+                                                    <div class="modal-body-inclusive">
+                                                        <div class="form-control">
+                                                            <input class="checkbox1" type="radio"
+                                                                name="checks" id="yes"
+                                                            value="Male">Male
+                                                            <input class="checkbox2" type="radio"
+                                                                name="checks" id="no"
+                                                            value="Female">Female
+                                                        </div>
+                                                        <div class="form-control dob">
+                                                            <input type="date" name ="dob" 
+                                                            id ="dob" placeholder="Dob*" value="#directory.dob#">
+                                                        </div>
+                                                        <div class="form-control photo">
+                                                            <input type="file" name ="photo" 
+                                                            id="photo" placeholder="Upload photo*" value="#directory.photo#">
+                                                        </div>
+                                                    </div>
+                                    
+                                                    <h2>Contact Details</h2><hr>
+                                                    <div class="modal-body">
+                                                        <div class="form-control">
+                                                            <input type="text" name ="phone" 
+                                                            id ="phone" placeholder="Phone*" value="#directory.phone#">
+                                                        </div>
+                                                        <div class="form-controls">
+                                                            <input type="email" name ="email" 
+                                                            id ="email" placeholder="Email*" value="#directory.email#">
+                                                        </div>
+                                                        <div class="form-control">
+                                                            <input type="text" name ="street" 
+                                                            id ="street" placeholder="Street*" value="#directory.street#">
+                                                        </div>
+                                                    </div>
+                                    
+                                                    <div class="modal-body-bon">
+                                                        <div class="form-control">
+                                                            <input type="text" name ="pinCode" 
+                                                            id ="pinCode" placeholder="Pincode*" value="#directory.pinCode#">
+                                                        </div>
+                                                        <div class="form-controls">
+                                                            <input type="text" name ="address" 
+                                                            id ="address" placeholder="Address*"value="#directory.address#" >
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn modal-btn">Submit
+                                                    </button>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" 
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!---view edit modal ends here  --->
+                            </cfloop>
+                        </cfoutput>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </section>
-
-<div id="myModals" class="modal">
-  <div class="modal-content">
-  <span class="closes">&times;</span>
-      <div class="contact-list">
-          <div class="modal-container ">
-              <div class="modal-head">
-              <h2>Contact Details</h2>
-              <div id="alert"></div>
-          </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-
-
-<script>
-  function onAddressBookTriggerViewDetails(){
-  // Get the modal
-  var modal = document.getElementById("myModals");
-
-  // Get the button that opens the modal
-  var btn = document.getElementById("myBtnView");
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("closes")[0];
-
-  // When the user clicks the button, open the modal 
-  btn.onclick = function() {
-  modal.style.display = "block";
-  }
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-  modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-}
-</script>
-
 <cfinclude template="../section/footer.cfm">
