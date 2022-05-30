@@ -1,7 +1,6 @@
 <cfcomponent>
 
     <cffunction  name="addressBookSignup" access="remote" output="true" returnType="string">
-        
         <cfargument  name="fullName" type="string" required="yes">
         <cfargument  name="emailId" type="string" required="yes">
         <cfargument  name="userName" type="string" required="yes">
@@ -38,7 +37,6 @@
             <cfparam name="arguments.password" default="">
             <cfparam name="arguments.confirmPassword" default="">
 
-            <!--- email and username validation starts--->
             <cfquery name="emailVerify">
                 SELECT *FROM coldfusiion.addressbook_register WHERE emailId = "#arguments.emailId#";
             </cfquery>
@@ -53,7 +51,6 @@
                 <cfset local.aErrorMessages = 'The username already registered'/>
                 <cflocation  url="../auth/signup.cfm?aMessages=#local.aErrorMessages#">
             </cfif> 
-            <!--- email and username validation ends--->
 
             <cfquery name="addData" result = result >
                 INSERT INTO coldfusiion.addressbook_register(fullName,emailId,userName,password,status)
@@ -65,8 +62,8 @@
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="1">      
                 )
             </cfquery>
-            <cfset local.message  ="Application submitted successfully">
-            <cflocation  url="../auth/signup.cfm?aMessageSuccess=#local.message#">   
+        <cfset local.message  ="Application submitted successfully">
+        <cflocation  url="../auth/signup.cfm?aMessageSuccess=#local.message#">   
         </cfif>
     
     </cffunction>
@@ -159,7 +156,6 @@
             destination="C:\coldFusion2021\cfusion\wwwroot\ADDRESSBOOK\uploads\">
     
             <cfset local.imageValue = #cffile.serverFile#>
-    
             <cfparam name="arguments.title" default="">
             <cfparam name="arguments.firstName" default="">
             <cfparam name="arguments.lastName" default="">
@@ -175,7 +171,6 @@
             <cfparam name="arguments.status" default="1">
 
             <cfparam name="Session.addressBookCredentials.id" default="Not Authenticated">
-    
             <cfquery name="addData" result = result>
                 INSERT INTO coldfusiion.adbookcontacts(userId,title,firstName,lastName,email,gender,dob,
                 photo,address,phone,street,pincode,status)
@@ -225,45 +220,96 @@
         <cfargument name="email" type="string" required="true">
         <cfargument name="dob" type="string" required="true">
         <cfargument name="photo" type="string" required="true">
+        <cfargument name="defaultPhoto" type="string" required="true">
         <cfargument name="address" type="string" required="true">
         <cfargument name="pinCode" type="string" required="true">
         <cfargument name="street" type="string" required="true">
         <cfargument name="phone" type="string" required="true">
         <cfargument name="checks" type="string" required="true">
 
-        <cfparam name="arguments.title" default="">
-        <cfparam name="arguments.firstName" default="">
-        <cfparam name="arguments.lastName" default="">
-        <cfparam name="arguments.email" default="">
-        <cfparam name="arguments.password" default="">
-        <cfparam name="arguments.dob" default="">
-        <cfparam name="arguments.address" default="">
-        <cfparam name="arguments.pinCode" default="">
-        <cfparam name="arguments.street" default="">
-        <cfparam name="arguments.phone" default="">
-        <cfparam name="arguments.checks" default="">
-        <cfparam name="arguments.photo" default="imageValue">
-        <cfparam name="arguments.status" default="1">
+        <cfset local.aErrorMessages =  "">
+        <cfif arguments.title EQ ''>
+            <cfset local.aErrorMessages = 'Please provide your title'/>
+        </cfif>
+        <cfif arguments.email EQ '' OR NOT isValid("email",arguments.email)>
+            <cfset local.aErrorMessages = 'Please provide valid email ID'/>
+         </cfif>
+        <cfif arguments.lastName EQ ''> 
+        <cfset local.aErrorMessages = 'Please provide valid last name'/>
+        </cfif> 
+        <cfif arguments.dob EQ ''>
+            <cfset local.aErrorMessages = 'Please provide valid dob'/>
+        </cfif>
+        <cfif arguments.address EQ ''>
+            <cfset local.aErrorMessages = 'Please provide valid address'/>
+        </cfif>
+        <cfif arguments.pinCode EQ ''>
+            <cfset local.aErrorMessages = 'Please provide valid Pincode'/>
+        </cfif>
+        <cfif arguments.street EQ ''>
+            <cfset local.aErrorMessages = 'Please provide valid street name'/>
+        </cfif>
+        <cfif arguments.phone EQ ''>
+            <cfset local.aErrorMessages = 'Please provide valid phone'/>
+        </cfif>
+        <cfif arguments.checks EQ ''>
+            <cfset local.aErrorMessages = 'Please provide valid gender option'/>
+        </cfif>
 
-        <cfquery name="updateData">
-           UPDATE coldfusiion.adbookcontacts SET 
-            userId = <cfqueryparam  CFSQLType="cf_sql_integer" value="#Session.addressBookCredentials.id#">,
-            title = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.title#">,
-            firstName = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.firstName#">,
-            lastName  = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.lastName#">,
-            email =<cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.email#">,
-            gender = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.checks#">,
-            dob = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.dob#">,
-            photo = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.photo#">,
-            address = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.address#">,
-            phone = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.phone#">,
-            street = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.street#">,
-            pinCode = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.pinCode#">,
-            status = <cfqueryparam  CFSQLType="cf_sql_integer" value="1">
-            WHERE contactId = "#arguments.contactId#"
-        </cfquery>
-        <cfset local.message  ="Contact updated successfully">
-        <cflocation  url="./pages/dashboard.cfm?aMessages=#local.message#"> 
+        <cfif len(trim(local.aErrorMessages)) NEQ 0>
+            <cflocation  url="../pages/dashboard.cfm?aMessages=#local.aErrorMessages#">
+        <cfelse> 
+            <cfparam name="arguments.title" default="">
+            <cfparam name="arguments.firstName" default="">
+            <cfparam name="arguments.lastName" default="">
+            <cfparam name="arguments.email" default="">
+            <cfparam name="arguments.password" default="">
+            <cfparam name="arguments.dob" default="">
+            <cfparam name="arguments.address" default="">
+            <cfparam name="arguments.pinCode" default="">
+            <cfparam name="arguments.street" default="">
+            <cfparam name="arguments.phone" default="">
+            <cfparam name="arguments.checks" default="">
+            <cfparam name="imageValue" default="">
+            <cfparam name="arguments.status" default="1">
+            <cfparam name="Session.addressBookCredentials.id" default="Not Authenticated">
+
+            <cfif len(trim(arguments.photo)) NEQ 0>
+                <cffile action="upload"
+                fileField="photo"
+                nameconflict="overwrite"
+                destination="C:\coldFusion2021\cfusion\wwwroot\ADDRESSBOOK\uploads\">
+                <cfset local.imageUpdatedValue = #cffile.serverFile#>
+            <cfelse>
+                <cfset local.imageUpdatedValue = #arguments.defaultPhoto#>
+            </cfif>
+            <cfquery name="updateData">
+                UPDATE coldfusiion.adbookcontacts SET 
+                    userId = <cfqueryparam  CFSQLType="cf_sql_integer" value="#Session.addressBookCredentials.id#">,
+                    title = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.title#">,
+                    firstName = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.firstName#">,
+                    lastName  = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.lastName#">,
+                    email =<cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.email#">,
+                    gender = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.checks#">,
+                    dob = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.dob#">,
+                    photo = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#local.imageUpdatedValue#">,
+                    address = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.address#">,
+                    phone = <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.phone#">,
+                    street = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.street#">,
+                    pinCode = <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.pinCode#">,
+                    status = <cfqueryparam  CFSQLType="cf_sql_integer" value="1">
+                WHERE contactId = "#arguments.contactId#"
+            </cfquery>
+            <cfset local.message  ="Contact updated successfully">
+            <cflocation  url="../pages/dashboard.cfm?aMessageSuccess=#local.message#"> 
+        </cfif>
+    </cffunction>
+
+    <cffunction name="getDirectoryInfo" access="public" output="true"> 
+        <cfquery name="directoryList">
+            SELECT *FROM coldfusiion.adbookcontacts;
+         </cfquery>
+        <cfreturn directoryList>
     </cffunction>
 
 </cfcomponent>

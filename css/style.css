@@ -312,6 +312,7 @@ h4.view-modal-title {
 .btn-outline {
     background-color: transparent;
     border: 1px #047ade solid;
+    color:#000;
 }
 button.btn.btn-login{
     margin-left: 65px;
@@ -456,4 +457,7 @@ button.btn.btn-signup{
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+table .avatar-img{
+    width:70px;
 }

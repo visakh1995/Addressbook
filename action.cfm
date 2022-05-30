@@ -4,3 +4,4 @@
     <cfset deleteDirectory = createObject("component","components.userdefined")> 
     <cfset res = deleteDirectory.addressBookDelete(deleteId)>
 </cfif>
+

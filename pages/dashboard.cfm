@@ -7,7 +7,19 @@
 <section class="dashboard">
     <div class="container-2">
         <div class="dashboard-topbar grids">
-            <p>ADDRESS BOOK CONTACT LIST!!</p>
+            <p>ADDRESS BOOK CONTACT LIST!!
+                <span class="">
+                <a href="./generatePdf.cfm?pdf">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </a>              
+                <a href="./generateExcel.cfm?excel">
+                    <i class="fa-regular fa-file-excel"></i>
+                </a>
+                <button onclick = printContactDirectory('detailsTable')>
+                    <i class="fa-solid fa-print"></i>
+                </button>
+              </span>     
+            </p>
         </div>
         <div class="dashboard-panel card grid-2 my-2">
             <div class="panel-profile card">
@@ -31,9 +43,10 @@
                       </cfoutput>
                     </div>
                 </cfif>
-                <table>
+                <table id="detailsTable">
                     <thead>
                         <tr>
+                            <th class="avatar-img"></th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
@@ -44,6 +57,7 @@
                         <cfoutput>
                             <cfloop array ="#contactDirectory#" index="directory">
                                 <tr>
+                                    <td><img width="5px" src="../uploads/#getFileFromPath(directory.photo)#"></a></td>
                                     <td>#directory.firstName#</td>
                                     <td>#directory.email#</td>
                                     <td>#directory.phone#</td>
@@ -116,12 +130,14 @@
                                                 <form class="my-4" method="post" enctype="multipart/form-data" 
                                                     action="../components/userdefined.cfc?method=addressBookUpdateContactForm">
                                                     <h2>Personal Contact</h2><hr>
+
                                                     <div class="modal-body">
                                                         <div class="form-control">
                                                             <select  class="fullWidth" name = "title" id="title"> 
-                                                                <option value = "">--- Select ---</option> 
+                                                                <option value = "#directory.title#">#directory.title#</option> 
                                                                 <option value = "Mr">Mr</option> 
                                                                 <option value = "Mrs">Mrs</option>  
+                                                                <option value = "Miss">Miss</option> 
                                                             </select>
                                                         </div>
                                                         <div class="form-control">
@@ -138,11 +154,11 @@
                                                     <div class="modal-body-inclusive">
                                                         <div class="form-control">
                                                             <input class="checkbox1" type="radio"
-                                                                name="checks" id="yes"
-                                                            value="Male">Male
+                                                                name="checks" id="yes" value="Male"
+                                                                <cfif directory.gender eq "Male" >checked</cfif>>Male
                                                             <input class="checkbox2" type="radio"
-                                                                name="checks" id="no"
-                                                            value="Female">Female
+                                                                name="checks" id="no" value="Female"
+                                                                <cfif directory.gender eq "Female" >checked</cfif>>Female
                                                         </div>
                                                         <div class="form-control dob">
                                                             <input type="date" name ="dob" 
@@ -151,6 +167,11 @@
                                                         <div class="form-control photo">
                                                             <input type="file" name ="photo" 
                                                             id="photo" placeholder="Upload photo*" value="#directory.photo#">
+                                                            <input type="hidden" name ="defaultPhoto" 
+                                                            id="photo" placeholder="Upload photo*" value="#directory.photo#">
+                                                            <cfif isDefined("directory.photo")>
+                                                                <img src="../uploads/#getFileFromPath(directory.photo)#"></a>
+                                                            </cfif>
                                                         </div>
                                                     </div>
                                     
@@ -180,8 +201,7 @@
                                                             id ="address" placeholder="Address*"value="#directory.address#" >
                                                         </div>
                                                     </div>
-                                                    <button class="btn modal-btn">Submit
-                                                    </button>
+                                                    <button class="btn modal-btn">Submit</button>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger" 
                                                         data-bs-dismiss="modal">Close</button>
