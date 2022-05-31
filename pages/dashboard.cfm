@@ -15,7 +15,7 @@
                 <a href="./generateExcel.cfm?excel">
                     <i class="fa-regular fa-file-excel"></i>
                 </a>
-                <button onclick = printContactDirectory('detailsTable')>
+                <button onclick = "return printContactDirectory()">
                     <i class="fa-solid fa-print"></i>
                 </button>
               </span>     
@@ -57,7 +57,7 @@
                         <cfoutput>
                             <cfloop array ="#contactDirectory#" index="directory">
                                 <tr>
-                                    <td><img width="5px" src="../uploads/#getFileFromPath(directory.photo)#"></a></td>
+                                    <td><img src="../uploads/#getFileFromPath(directory.photo)#"></a></td>
                                     <td>#directory.firstName#</td>
                                     <td>#directory.email#</td>
                                     <td>#directory.phone#</td>

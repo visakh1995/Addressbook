@@ -81,6 +81,10 @@ function onAddressBookTriggerContact(){
   }
 }
 
+function printContactDirectory(){
+  alert("shows");
+}
+
 
 
 

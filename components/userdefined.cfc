@@ -187,7 +187,7 @@
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value ="#arguments.phone#">,
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.street#">,
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="#arguments.pinCode#">,
-                    <cfqueryparam  CFSQLType="cf_sql_integer" value="3">
+                    <cfqueryparam  CFSQLType="cf_sql_integer" value="1">
                 )
             </cfquery>
             <cfset local.message  ="Contact created successfully">
