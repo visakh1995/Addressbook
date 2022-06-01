@@ -30,9 +30,7 @@
                     <div class="addressbook-form-footer my-4">
                         <p>Or Sign In Using</p>
                         <a href="../components/userAuth.cfc?method=googleSignIn">google</a>
-                        <a href="googleSignIn">Facebook</a>
-
-
+                        <a href="../components/userAuth.cfc?method=facebookSignIn">Facebook</a>
                         <p>Dont have an account?<span><a href="signup.cfm">Register here</a></span></p>
                     </div>
                 </form>
