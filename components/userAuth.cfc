@@ -21,8 +21,8 @@
                 </cflock>
             </cfif>
             <cfif structKeyExists(Session,"addressBookCredentials")>
-                <cfset Session.addressBookCredentials["id"] = "#res.id#">
-                <cfset Session.addressBookCredentials["userName"] = "#res.name#">
+                <cfset Session.addressBookCredentials["id"] = "#verifyGoogleDetails.id#">
+                <cfset Session.addressBookCredentials["userName"] = "#verifyGoogleDetails.fullName#">
                 <cfset Session.addressBookCredentials["isAuthenticated"] = "True">
             </cfif>
             <cflocation  url="../pages/dashboard.cfm"> 
@@ -43,8 +43,8 @@
                 </cflock>
             </cfif>
             <cfif structKeyExists(Session,"addressBookCredentials")>
-                <cfset Session.addressBookCredentials["id"] = "#res.id#">
-                <cfset Session.addressBookCredentials["userName"] = "#res.name#">
+                <cfset Session.addressBookCredentials["id"] = "#verifyGoogleDetails.id#">
+                <cfset Session.addressBookCredentials["userName"] = "#verifyGoogleDetails.fullName#">
                 <cfset Session.addressBookCredentials["isAuthenticated"] = "True">
             </cfif>
             <cflocation  url="../pages/dashboard.cfm">  
@@ -71,8 +71,8 @@
                 </cflock>
             </cfif>
             <cfif structKeyExists(Session,"addressBookCredentials")>
-                <cfset Session.addressBookCredentials["id"] = "#resFb.id#">
-                <cfset Session.addressBookCredentials["userName"] = "#resFb.id#">
+                <cfset Session.addressBookCredentials["id"] = "#verifyFacebookDetails.id#">
+                <cfset Session.addressBookCredentials["userName"] = "#verifyFacebookDetails.fullName#">
                 <cfset Session.addressBookCredentials["isAuthenticated"] = "True">
             </cfif>
             <cflocation  url="../pages/dashboard.cfm"> 
@@ -93,8 +93,8 @@
                 </cflock>
             </cfif>
             <cfif structKeyExists(Session,"addressBookCredentials")>
-                <cfset Session.addressBookCredentials["id"] = "#resFb.id#">
-                <cfset Session.addressBookCredentials["userName"] = "#resFb.id#">
+                <cfset Session.addressBookCredentials["id"] = "#verifyFacebookDetails.id#">
+                <cfset Session.addressBookCredentials["userName"] = "#verifyFacebookDetails.fullName#">
                 <cfset Session.addressBookCredentials["isAuthenticated"] = "True">
             </cfif>
             <cflocation  url="../pages/dashboard.cfm">  

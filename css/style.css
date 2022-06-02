@@ -64,13 +64,15 @@ img{
     z-index:100;
 }
 .addressbook-form.signup.card {
-    max-height: 610px;
+    min-height: 610px;
     width:670px;
 }
 .addressbook-form h1{
     font-size: 20px;
     text-align: center;
-    font-weight:500;
+    font-weight: 900;
+    color: #047ade;
+    letter-spacing: 1px;
 }
 .addressbook-form p{
     padding:5px 0;
@@ -100,11 +102,37 @@ img{
     height:400px;
     width:200px;
 }
+.addressbook-sidebar-signup{
+    background-color: #5286b3;
+    height:400px;
+    width:200px;
+}
 .addressbook .flex{
     display:flex;
     justify-content: space-evenly;
 }
-
+.addressbook-form-footer{
+    text-align: center;
+    margin-top: 45px;
+}
+.addressbook-form-footer .o-auth{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.addressbook-sidebar-login .sidebar-logo{
+    position: absolute;
+    font-size: 52px;
+    margin-top: 160px;
+    margin-left: 74px;
+    color: #fff;
+}
+.signup-title{
+    padding-top: 30px;
+    text-align: left;
+}
+h1.signup-title {
+    text-align: left;
+}
 /* dashboard */
 section.dashboard {
     background: #b4acbe;
@@ -125,24 +153,36 @@ section.dashboard {
     border-radius: 6px;
 }
 .panel-list{
-    height:300px;
+    min-height:300px;
     background-color:#fff;
     border-radius: 6px;
 }
 .panel-list.card {
     max-height: 400px;
 }
+.topbar-docs {
+    position: absolute;
+    right: 152px;
+    padding: 28px;
+    font-size: 24px;
+}
+.topbar-heading p{
+    font-weight: 400;
+}
 
 /* table */
 table {
-    font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
   }
   
-td, th{
+td,th{
     text-align: left;
     padding: 8px;
+}
+thead {
+    font-size: 12px;
+    color: #047ade;
 }
   
 tr:nth-child(even) {
@@ -188,7 +228,7 @@ tr:nth-child(even) {
 .modal-body input[type="text"],[type="password"],[type="email"],[type="date"]{
     border:0;
     border-bottom: 1px solid #b4becb;
-    width:80%;
+    width:100%;
     padding:3px;
     font-size: 16px;
 }
@@ -210,10 +250,9 @@ tr:nth-child(even) {
 .modal-body-bon input[type="text"],[type="email"]{
     border:0;
     border-bottom: 1px solid #b4becb;
-    width:90%;
+    width:100%;
     padding:3px;
     font-size: 16px;
-    margin-left: 10px;
 }
 .modal-body-bon input:focus {
     outline: none;
@@ -238,9 +277,16 @@ tr:nth-child(even) {
 /* view modal */
 h4.view-modal-title {
     text-align: center;
+    background-color: #047ade;
+    padding: 20px;
+    color: #fff;
 }
 .modal-titles p{
     font-size: 15px;;
+}
+.modal-container .flex{
+    justify-content:flex-start;
+    padding: 10px;
 }
 
 /* uttilities */
@@ -259,6 +305,12 @@ h4.view-modal-title {
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+.flexes{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 8%;
 }
 .card{
     border-radius: 5px;
@@ -309,20 +361,25 @@ h4.view-modal-title {
 .btn:hover {
     transform: scale(0.98);
 }
+button.btn.btn-outline.btn-show {
+    padding: 5px 20px;
+}
 .btn-outline {
     background-color: transparent;
     border: 1px #047ade solid;
     color:#000;
 }
 button.btn.btn-login{
-    margin-left: 65px;
+    margin-left: 48px;
     margin-top: 20px;
     color:#047ade;
+    padding: 5px 43px;
 }
 button.btn.btn-signup{
-    margin-left: 45px;
+    margin-left: 40px;
     margin-top: 10px;
     color:#047ade;
+    padding: 5px 43px;
 }
 #alert{
     background-color: red;
@@ -347,6 +404,14 @@ button.btn.btn-signup{
     text-align:center;
     font-weight:900;
 }
+span.google{
+    padding: 8px;
+    font-size: 22px;
+}
+span.facebook{
+    font-size: 22px;
+}
+
 
 
 /* margin */
@@ -458,6 +523,13 @@ button.btn.btn-signup{
     text-decoration: none;
     cursor: pointer;
 }
-table .avatar-img{
-    width:70px;
+table .avatar-img {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profile-name{
+    text-align: center;
 }

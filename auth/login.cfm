@@ -3,7 +3,7 @@
     <div class="container grid">
         <div class="addressbook-form card flex">
             <div class="addressbook-sidebar-login">
-                <!--- <img src=""> --->
+                <span class="sidebar-logo"><i class="fa-solid fa-address-book"></i></span>
             </div>
             <div class="addressbook-form-fields">
                 <div id="alert"></div>
@@ -27,11 +27,17 @@
                     <button class="btn btn-outline btn-login" type="submit"
                         onclick ="return onAddressBookLoginValidate()">Login
                     </button>
-                    <div class="addressbook-form-footer my-4">
-                        <p>Or Sign In Using</p>
-                        <a href="../components/userAuth.cfc?method=googleSignIn">google</a>
-                        <a href="../components/userAuth.cfc?method=facebookSignIn">Facebook</a>
-                        <p>Dont have an account?<span><a href="signup.cfm">Register here</a></span></p>
+                    <div class="addressbook-form-footer">
+                        <h5>Or Sign In Using</h5>
+                        <div class="o-auth">
+                            <span class="google"><a href="../components/userAuth.cfc?method=googleSignIn">
+                                <i class="fa-brands fa-google"></i>
+                            </a></span>
+                            <span class="facebook"><a href="../components/userAuth.cfc?method=facebookSignIn">
+                                <i class="fa-brands fa-facebook"></i>
+                            </a></span>
+                        </div>
+                        <h5>Dont have an account?<span><a href="signup.cfm">Register here</a></span></h5>
                     </div>
                 </form>
             </div>  

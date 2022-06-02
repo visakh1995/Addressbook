@@ -19,6 +19,7 @@ function onAddressBookSignupValidate() {
     }
 }
 function onAddressBookContactValidate(){
+  alert('hello');
   var title = document.getElementById("title").value;
   var firstName = document.getElementById("firstName").value;
   var lastName = document.getElementById("lastName").value;
@@ -81,9 +82,6 @@ function onAddressBookTriggerContact(){
   }
 }
 
-function printContactDirectory(){
-  alert("shows");
-}
 
 
 

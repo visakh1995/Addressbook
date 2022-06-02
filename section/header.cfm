@@ -15,11 +15,14 @@
     <body>
         <div class="navbar">
             <div class="container flex">
-                <h2>ADDRESS BOOK</h2>
+                <h2><i class="fa-solid fa-address-book"></i> ADDRESS BOOK</h2>
                 <cfif structKeyExists(Session,"addressBookCredentials")>
                     <nav>
                         <ul>
-                            <li><a href="../components/userdefined.cfc?method=loggedOut">Logout</a></li>
+                            <li>
+                                <a href="../components/userdefined.cfc?method=loggedOut">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                                </a>
                         </ul>
                     </nav>
                 <cfelse>
