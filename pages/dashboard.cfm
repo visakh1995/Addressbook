@@ -21,7 +21,7 @@
                 <a href="./generateExcel.cfm?excel">
                     <i class="fa-regular fa-file-excel"></i>
                 </a>
-                <a href="./generateExcel.cfm?print">
+                <a href="../components/print.cfc?method=printAddressBook">
                     <i class="fa-solid fa-print"></i>
                 </a>   
             </div>
@@ -103,6 +103,10 @@
                                             <!-- Modal body -->
                                             <div class="modal-body"> 
                                                 <div class="modal-container">
+                                                    <div class="modal-profile">
+                                                        <img class="avatarview-img" 
+                                                        src="../uploads/#getFileFromPath(directory.photo)#">
+                                                    </div>
                                                     <div class="modal-base flex">
                                                         <div class="modal-title">
                                                             <h4>Name
@@ -251,11 +255,13 @@
                                                                 id="photo" placeholder="Upload photo*" 
                                                                 value="#directory.photo#">
                                                             <input type="hidden" name ="defaultPhoto" 
-                                                                id="photo" placeholder="Upload photo*" 
-                                                                value="#directory.photo#">
+                                                            id="photo" placeholder="Upload photo*" 
+                                                            value="#directory.photo#">
+                                                        </div>
+                                                        <div class="updateImage">
                                                             <cfif isDefined("directory.photo")>
-                                                                <img src="../uploads/#getFileFromPath(directory.photo)#">
-                                                            </cfif>
+                                                                <img class="avatarupdate-img" src="../uploads/#getFileFromPath(directory.photo)#">
+                                                        </cfif>
                                                         </div>
                                                     </div>
                                     
@@ -266,7 +272,7 @@
                                                                 id ="phone" placeholder="Phone*"
                                                                 value="#directory.phone#">
                                                         </div>
-                                                        <div class="form-controls">
+                                                        <div class="form-control">
                                                             <input type="email" name ="email" 
                                                                 id ="email" placeholder="Email*" 
                                                                 value="#directory.email#">
@@ -278,13 +284,13 @@
                                                         </div>
                                                     </div>
                                     
-                                                    <div class="modal-body-bon">
+                                                    <div class="modal-body">
                                                         <div class="form-control">
                                                             <input type="text" name ="pinCode" 
                                                                 id ="pinCode" placeholder="Pincode*"
                                                                 value="#directory.pinCode#">
                                                         </div>
-                                                        <div class="form-controls">
+                                                        <div class="form-control">
                                                             <input type="text" name ="address" 
                                                                 id ="address" placeholder="Address*"
                                                                 value="#directory.address#" >
@@ -302,7 +308,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!---view edit modal ends here  --->
                             </cfloop>
                         </cfoutput>
                     </tbody>

@@ -23,6 +23,7 @@
                                 <a href="../components/userdefined.cfc?method=loggedOut">
                                     <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
                                 </a>
+                            </li>
                         </ul>
                     </nav>
                 <cfelse>
@@ -33,7 +34,6 @@
                         </ul>
                     </nav>
                 </cfif>
-
             </div>
         </div>
 

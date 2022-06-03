@@ -307,9 +307,10 @@
 
     <cffunction name="getDirectoryInfo" access="public" output="true"> 
         <cfquery name="directoryList">
-            SELECT *FROM coldfusiion.adbookcontacts;
+            SELECT *FROM coldfusiion.adbookcontacts WHERE 
+            userId = <cfqueryparam  CFSQLType = "cf_sql_varchar" value="#Session.addressBookCredentials.id#">
          </cfquery>
         <cfreturn directoryList>
     </cffunction>
-
+    
 </cfcomponent>

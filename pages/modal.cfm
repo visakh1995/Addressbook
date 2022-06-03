@@ -54,7 +54,7 @@
                         <input type="text" name ="phone" required
                         id ="phone" placeholder="Phone*">
                     </div>
-                    <div class="form-controls">
+                    <div class="form-control">
                         <input type="email" name ="email" required
                         id ="email" placeholder="Email*">
                     </div>
@@ -64,12 +64,12 @@
                     </div>
                 </div>
 
-                <div class="modal-body-bon">
+                <div class="modal-body">
                     <div class="form-control">
                         <input type="text" name ="pinCode" required
                         id ="pinCode" placeholder="Pincode*">
                     </div>
-                    <div class="form-controls">
+                    <div class="form-control">
                         <input type="text" name ="address" required
                         id ="address" placeholder="Address*">
                     </div>

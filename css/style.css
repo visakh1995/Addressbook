@@ -225,10 +225,10 @@ tr:nth-child(even) {
 .modal-body .form-control {
     padding:30px 0;
 }
-.modal-body input[type="text"],[type="password"],[type="email"],[type="date"]{
+.modal-body input[type="text"],[type="email"],[type="date"]{
     border:0;
     border-bottom: 1px solid #b4becb;
-    width:100%;
+    width:89%;
     padding:3px;
     font-size: 16px;
 }
@@ -247,22 +247,22 @@ tr:nth-child(even) {
     margin-top: 45px;
     margin-left: 250px;
 }
-.modal-body-bon input[type="text"],[type="email"]{
+/* .modal-body-bon input[type="text"],[type="email"]{
     border:0;
     border-bottom: 1px solid #b4becb;
     width:100%;
     padding:3px;
     font-size: 16px;
-}
+} */
 .modal-body-bon input:focus {
     outline: none;
 }
-.form-control.dob {
+/* .form-control.dob {
     margin-left: 85px;
 }
 .form-control.photo {
     width: 200px;
-}
+} */
 .fullWidth{
     border:0;
     border-bottom: 1px solid #b4becb;
@@ -322,6 +322,15 @@ h4.view-modal-title {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 .card2{
+    border-radius: 5px;
+    background: #fff;
+    color:#000;
+    padding:10px;
+    margin:10px;
+    position: relative;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+.card3{
     border-radius: 5px;
     background: #fff;
     color:#000;
@@ -529,6 +538,22 @@ table .avatar-img {
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+}
+.avatarview-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    margin-left: 58px;
+}
+.avatarUpdate-img {
+    width: 57px;
+    height: 56px;
+    margin-left: -89px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
 }
 .profile-name{
     text-align: center;
