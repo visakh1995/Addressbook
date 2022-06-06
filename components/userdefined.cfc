@@ -150,6 +150,20 @@
         <cfif len(trim(local.aErrorMessages)) NEQ 0>
             <cflocation  url="../pages/dashboard.cfm?aMessages=#local.aErrorMessages#">
         <cfelse>
+            <cfquery name="emailVerify">
+                SELECT *FROM coldfusiion.adbookcontacts WHERE email = "#arguments.email#";
+            </cfquery>
+            <cfquery name="phoneVerify">
+                SELECT *FROM coldfusiion.adbookcontacts WHERE photo = "#arguments.phone#";
+            </cfquery>
+            <cfif emailVerify.RecordCount NEQ 0>
+                <cfset local.aErrorMessages = 'The email already registered'/>
+                <cflocation  url="../pages/dashboard.cfm?aMessages=#local.aErrorMessages#">
+            </cfif> 
+            <cfif phoneVerify.RecordCount NEQ 0>
+                <cfset local.aErrorMessages = 'The phone already registered'/>
+                <cflocation  url="../pages/dashboard.cfm?aMessages=#local.aErrorMessages#">
+            </cfif> 
             <cffile action="upload"
             fileField="photo"
             nameconflict="overwrite"

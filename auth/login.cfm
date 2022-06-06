@@ -10,8 +10,9 @@
                 <form method="post" action="../components/userdefined.cfc?method=addressBookLogin">
                     <h1>LOGIN</h1>
                     <cfif isDefined("aMessages")>
-                        <div class="alertClass">
+                        <div class="alertClass" id="alertClass">
                             <cfoutput>
+                                <span class="closebtn" onclick="closeAlertBox()">&times</span> 
                                 <p>#aMessages#</p>
                             </cfoutput>
                         </div>

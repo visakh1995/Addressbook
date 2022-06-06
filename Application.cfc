@@ -34,6 +34,7 @@
         hint="Fires when the session is first created">
 
         <!---setting up cfid/cftoken as cookies,cz session ends on browser close --->
+        <cfset session.started = now()>
         <cfif not isDefined("Cookie.CFID")>
             <cflock scope="session" type = "readonly" timeout="5">
                 <cfcookie name="CFID" value="#session.CFID#">

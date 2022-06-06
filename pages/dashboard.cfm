@@ -1,3 +1,6 @@
+<cfif NOT isDefined("Session.addressBookCredentials")>
+	<cflocation url="../auth/login.cfm" addtoken="no" /> 
+</cfif>
 <cfinclude template="../section/header.cfm">
 <cfinclude template ="./modal.cfm">
 
@@ -21,7 +24,7 @@
                 <a href="./generateExcel.cfm?excel">
                     <i class="fa-regular fa-file-excel"></i>
                 </a>
-                <a href="../components/print.cfc?method=printAddressBook">
+                <a href="../pages/print.cfm">
                     <i class="fa-solid fa-print"></i>
                 </a>   
             </div>
@@ -38,15 +41,17 @@
             </div>
             <div class="panel-list card2">
                 <cfif isDefined("aMessageSuccess")>
-                  <div class="alertSuccess">
+                  <div class="alertSuccess" id="alertSuccess">
                     <cfoutput>
+                        <span class="closebtndash" onclick="closeAlertBoxSuccess()">&times</span> 
                         <p>#aMessageSuccess#</p>
                     </cfoutput>
                   </div>
                 </cfif>
                 <cfif isDefined("aMessages")>
-                    <div class="alertClass">
+                    <div class="alertClass" id="alertClass">
                       <cfoutput>
+                        <span class="closebtndash" onclick="closeAlertBox()">&times</span> 
                           <p>#aMessages#</p>
                       </cfoutput>
                     </div>

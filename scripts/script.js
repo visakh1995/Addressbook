@@ -19,7 +19,6 @@ function onAddressBookSignupValidate() {
     }
 }
 function onAddressBookContactValidate(){
-  alert('hello');
   var title = document.getElementById("title").value;
   var firstName = document.getElementById("firstName").value;
   var lastName = document.getElementById("lastName").value;
@@ -81,6 +80,23 @@ function onAddressBookTriggerContact(){
     }
   }
 }
+function printTable(divName) {
+  var printContents = document.getElementById(divName).innerHTML;
+  var originalContents = document.body.innerHTML;   
+  document.body.innerHTML = printContents;   
+  window.print();   
+  document.body.innerHTML = originalContents;
+}
+function closeAlertBox() {
+  document.getElementById("alertClass").style.display="none";
+}
+function closeAlertBoxes() {
+  document.getElementById("alert").style.display="none";
+}
+function closeAlertBoxSuccess() {
+  document.getElementById("alertSuccess").style.display="none";
+}
+
 
 
 

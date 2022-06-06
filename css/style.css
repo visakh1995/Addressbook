@@ -49,7 +49,6 @@ img{
     justify-content: space-between;
 }
 
-
 /* addressbook-signup */
 .addressbook{
     position:absolue;
@@ -247,22 +246,9 @@ tr:nth-child(even) {
     margin-top: 45px;
     margin-left: 250px;
 }
-/* .modal-body-bon input[type="text"],[type="email"]{
-    border:0;
-    border-bottom: 1px solid #b4becb;
-    width:100%;
-    padding:3px;
-    font-size: 16px;
-} */
 .modal-body-bon input:focus {
     outline: none;
 }
-/* .form-control.dob {
-    margin-left: 85px;
-}
-.form-control.photo {
-    width: 200px;
-} */
 .fullWidth{
     border:0;
     border-bottom: 1px solid #b4becb;
@@ -420,9 +406,6 @@ span.google{
 span.facebook{
     font-size: 22px;
 }
-
-
-
 /* margin */
 .my-1{
     margin: 1rem 0;
@@ -459,7 +442,7 @@ span.facebook{
     margin: 4rem 0;
 }
 
-  /* padding */
+/* padding */
 
 .py-1{
     padding: 1rem 0;
@@ -476,7 +459,7 @@ span.facebook{
 .py-5{
     padding: 4rem 0;
 }
-  /* margin */
+/* margin */
   
 .p-1{
     padding: 1rem 0;
@@ -557,4 +540,37 @@ table .avatar-img {
 }
 .profile-name{
     text-align: center;
+}
+.closebtn {
+    /* margin-right: 5px; */
+    padding:7px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+}
+.closebtndash {
+    margin-right: 5px;
+    margin-bottom: 4px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+}
+.closebtns {
+    margin-right: 7px;
+    margin-top: 4px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+}
+.closebtn:hover {
+    color: black;
 }

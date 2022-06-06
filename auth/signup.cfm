@@ -8,10 +8,12 @@
             <div class="addressbook-form-fields">
                 <form method="post" action="../components/userdefined.cfc?method=addressBookSignup">
                     <h1 class="signup-title">SIGNUP</h1>
+                    <span class="closebtns" onclick="closeAlertBoxes()">&times</span> 
                     <div id="alert"></div>
                     <cfif isDefined("aMessages")>
                         <div class="alertClass">
                             <cfoutput>
+                                <span class="closebtn" onclick="closeAlertBox()">&times</span> 
                                 <p>#aMessages#</p>
                             </cfoutput>
                         </div>
