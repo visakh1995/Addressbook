@@ -29,7 +29,8 @@
         </cfif>
 
         <cfif len(trim(local.aErrorMessages)) NEQ 0>
-            <cflocation  url="../auth/signup.cfm?aMessages=#local.aErrorMessages#">
+            <cfset local.encryptedMessage = ToBase64(local.aErrorMessages) />
+            <cflocation addtoken="no"  url="../auth/signup.cfm?aMessages=#local.encryptedMessage#">
         <cfelse>
             <cfparam name="arguments.fullName" default="">
             <cfparam name="arguments.emailId" default="">
@@ -45,11 +46,13 @@
             </cfquery>
             <cfif emailVerify.RecordCount neq 0>
                 <cfset local.aErrorMessages = 'The email already registered'/>
-                <cflocation  url="../auth/signup.cfm?aMessages=#local.aErrorMessages#">
+                <cfset local.encryptedMessage = ToBase64(local.aErrorMessages) />
+                <cflocation addtoken="no"  url="../auth/signup.cfm?aMessages=#local.encryptedMessage#">
             </cfif> 
             <cfif userNameVerify.RecordCount neq 0>
                 <cfset local.aErrorMessages = 'The username already registered'/>
-                <cflocation  url="../auth/signup.cfm?aMessages=#local.aErrorMessages#">
+                <cfset local.encryptedMessage = ToBase64(local.aErrorMessages) />
+                <cflocation addtoken="no"  url="../auth/signup.cfm?aMessages=#local.encryptedMessage#">
             </cfif> 
 
             <cfquery name="addData" result = result >
@@ -62,17 +65,17 @@
                     <cfqueryparam  CFSQLType="cf_sql_varchar" value="1">      
                 )
             </cfquery>
-        <cfset local.message  ="Application submitted successfully">
-        <cflocation  url="../auth/signup.cfm?aMessageSuccess=#local.message#">   
-        </cfif>
-    
+            <cfset local.message  ="User registered successfully">
+            <cfset local.encryptedMessage = ToBase64(local.message) />
+            <cflocation addtoken="no"   url="../auth/login.cfm?aMessageSuccess=#encryptedMessage#">   
+            </cfif>
     </cffunction>
 
     <cffunction  name="addressBookLogin" access="remote" output="true" returnType="string">
         <cfargument  name="userName" type="string" required="yes">
         <cfargument  name="password" type="string" required="yes">
         <cfset local.encodedPassword = hash("#arguments.password#", "SHA-256", "UTF-8")>
-
+        
         <cfquery name="verifiedDetails">
             SELECT *FROM coldfusiion.addressbook_register WHERE 
             userName = <cfqueryparam CFSQLType="cf_sql_varchar" value ="#arguments.userName#"> AND 
@@ -81,7 +84,7 @@
 
         <cfif verifiedDetails.RecordCount gt 0>
             <cfif NOT structKeyExists(Session,"addressBookCredentials")>
-                <cflock  timeout="20" scope="Session" type="Exclusive">
+                <cflock timeout="20" scope="Session" type="Exclusive">
                     <cfset Session.addressBookCredentials = structNew()>
                 </cflock>
             </cfif>
@@ -91,16 +94,17 @@
                 <cfset Session.addressBookCredentials["password"] = "#verifiedDetails.password#">
                 <cfset Session.addressBookCredentials["isAuthenticated"] = "True">
             </cfif>
-            <cflocation  url="../pages/dashboard.cfm"> 
+            <cflocation addtoken="no"  url="../pages/dashboard.cfm"> 
         <cfelse>
             <cfset local.message  ="Invalid username or password">
-            <cflocation  url="../auth/login.cfm?aMessages=#local.message#">  
+            <cfset local.encryptedMessage = ToBase64(local.message) />
+            <cflocation addtoken="no"  url="../auth/login.cfm?aMessages=#encryptedMessage#">  
         </cfif>
     </cffunction>
 
     <cffunction name="loggedOut" access="remote" output="true">
         <cfset StructDelete(Session, "addressBookCredentials")>
-        <cflocation  url="../auth/login.cfm">
+        <cflocation addtoken="no"  url="../auth/login.cfm">
     </cffunction>
 
     <cffunction name="addressBookCreateContactForm" access="remote" output="true">
@@ -148,7 +152,8 @@
             <cfset local.aErrorMessages = 'Please provide valid gender option'/>
         </cfif>
         <cfif len(trim(local.aErrorMessages)) NEQ 0>
-            <cflocation  url="../pages/dashboard.cfm?aMessages=#local.aErrorMessages#">
+            <cfset local.encryptedMessage = ToBase64(local.aErrorMessages) />
+            <cflocation addtoken="no"  url="../pages/dashboard.cfm?aMessages=#local.encryptedMessage#">
         <cfelse>
             <cfquery name="emailVerify">
                 SELECT *FROM coldfusiion.adbookcontacts WHERE email = "#arguments.email#";
@@ -158,11 +163,13 @@
             </cfquery>
             <cfif emailVerify.RecordCount NEQ 0>
                 <cfset local.aErrorMessages = 'The email already registered'/>
-                <cflocation  url="../pages/dashboard.cfm?aMessages=#local.aErrorMessages#">
+                <cfset local.encryptedMessage = ToBase64(local.aErrorMessages) />
+                <cflocation addtoken="no"  url="../pages/dashboard.cfm?aMessages=#local.encryptedMessage#">
             </cfif> 
             <cfif phoneVerify.RecordCount NEQ 0>
                 <cfset local.aErrorMessages = 'The phone already registered'/>
-                <cflocation  url="../pages/dashboard.cfm?aMessages=#local.aErrorMessages#">
+                <cfset local.encryptedMessage = ToBase64(local.aErrorMessages) />
+                <cflocation addtoken="no"  url="../pages/dashboard.cfm?aMessages=#local.encryptedMessage#">
             </cfif> 
             <cffile action="upload"
             fileField="photo"
@@ -205,11 +212,12 @@
                 )
             </cfquery>
             <cfset local.message  ="Contact created successfully">
-            <cflocation  url="../pages/dashboard.cfm?aMessageSuccess=#local.message#"> 
+            <cfset local.encryptedMessage = ToBase64(local.message) />
+            <cflocation addtoken="no"  url="../pages/dashboard.cfm?aMessageSuccess=#local.encryptedMessage#"> 
         </cfif>
     </cffunction>
 
-    <cffunction  name="listContacts" access="remote">
+    <cffunction  name="listContacts" access="remote" output="true">
         <cfquery name="list">
             SELECT * FROM coldfusiion.addressbook_contacts
         </cfquery>
@@ -223,7 +231,8 @@
             contactId = <cfqueryparam  CFSQLType = "cf_sql_integer" value="#arguments.deleteId#">
         </cfquery>
         <cfset local.message  ="Contact deleted successfully">
-        <cflocation  url="./pages/dashboard.cfm?aMessages=#local.message#"> 
+        <cfset local.encryptedMessage = ToBase64(local.message) />
+        <cflocation addtoken="no"  url="./pages/dashboard.cfm?aMessages=#local.encryptedMessage#"> 
     </cffunction>
 
     <cffunction name="addressBookUpdateContactForm" access="remote">
@@ -271,7 +280,8 @@
         </cfif>
 
         <cfif len(trim(local.aErrorMessages)) NEQ 0>
-            <cflocation  url="../pages/dashboard.cfm?aMessages=#local.aErrorMessages#">
+            <cfset local.encryptedMessage = ToBase64(local.message)/>
+            <cflocation addtoken="no"  url="../pages/dashboard.cfm?aMessages=#local.encryptedMessage#">
         <cfelse> 
             <cfparam name="arguments.title" default="">
             <cfparam name="arguments.firstName" default="">
@@ -315,7 +325,8 @@
                 WHERE contactId = "#arguments.contactId#"
             </cfquery>
             <cfset local.message  ="Contact updated successfully">
-            <cflocation  url="../pages/dashboard.cfm?aMessageSuccess=#local.message#"> 
+            <cfset local.encryptedMessage = ToBase64(local.message)/>
+            <cflocation addtoken="no"  url="../pages/dashboard.cfm?aMessageSuccess=#local.encryptedMessage#"> 
         </cfif>
     </cffunction>
 

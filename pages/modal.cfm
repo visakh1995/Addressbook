@@ -44,7 +44,8 @@
                     </div>
                     <div class="form-control photo">
                         <input type="file" name ="photo" required
-                        id="photo" placeholder="Upload photo*">
+                        id="photo" placeholder="Upload photo*" 
+                        accept=".jpeg,.png,.gif,.jpg">
                     </div>
                 </div>
 

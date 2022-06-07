@@ -25,7 +25,7 @@
                 <cfset Session.addressBookCredentials["userName"] = "#verifyGoogleDetails.fullName#">
                 <cfset Session.addressBookCredentials["isAuthenticated"] = "True">
             </cfif>
-            <cflocation  url="../pages/dashboard.cfm"> 
+            <cflocation addtoken ="no" url="../pages/dashboard.cfm"> 
         <cfelse>
             <cfquery name="addGoogleData" result = result>
                 INSERT INTO coldfusiion.addressbook_register(fullName,emailId,userName,password,status)
@@ -47,7 +47,7 @@
                 <cfset Session.addressBookCredentials["userName"] = "#verifyGoogleDetails.fullName#">
                 <cfset Session.addressBookCredentials["isAuthenticated"] = "True">
             </cfif>
-            <cflocation  url="../pages/dashboard.cfm">  
+            <cflocation addtoken ="no"  url="../pages/dashboard.cfm">  
         </cfif>
     </cffunction>
 
@@ -75,7 +75,7 @@
                 <cfset Session.addressBookCredentials["userName"] = "#verifyFacebookDetails.fullName#">
                 <cfset Session.addressBookCredentials["isAuthenticated"] = "True">
             </cfif>
-            <cflocation  url="../pages/dashboard.cfm"> 
+            <cflocation addtoken ="no"  url="../pages/dashboard.cfm"> 
         <cfelse>
             <cfquery name="addFacebookData" result = result>
                 INSERT INTO coldfusiion.addressbook_register(fullName,emailId,userName,password,status)
@@ -97,7 +97,7 @@
                 <cfset Session.addressBookCredentials["userName"] = "#verifyFacebookDetails.fullName#">
                 <cfset Session.addressBookCredentials["isAuthenticated"] = "True">
             </cfif>
-            <cflocation  url="../pages/dashboard.cfm">  
+            <cflocation addtoken ="no"  url="../pages/dashboard.cfm">  
         </cfif>
     </cffunction>
 </cfcomponent>

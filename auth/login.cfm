@@ -13,10 +13,20 @@
                         <div class="alertClass" id="alertClass">
                             <cfoutput>
                                 <span class="closebtn" onclick="closeAlertBox()">&times</span> 
-                                <p>#aMessages#</p>
+                                <cfset showMessage = ToString(ToBinary(aMessages))>
+                                <p>#showMessage#</p>
                             </cfoutput>
                         </div>
                     </cfif>
+                    <cfif isDefined("aMessageSuccess")>
+                        <div class="alertSuccess" id="alertSuccess">
+                            <cfoutput>
+                                <span class="closebtndash" onclick="closeAlertBoxSuccess()">&times</span> 
+                                <cfset showMessageSuccess = ToString(ToBinary(aMessageSuccess))>
+                                <p>#showMessageSuccess#</p>
+                            </cfoutput>
+                        </div>
+                      </cfif>
                     <div class="form-control">
                         <input type="text" name ="userName" id ="userName" 
                         placeholder="Username" required>

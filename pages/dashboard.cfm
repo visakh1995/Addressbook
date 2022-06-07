@@ -1,9 +1,8 @@
 <cfif NOT isDefined("Session.addressBookCredentials")>
-	<cflocation url="../auth/login.cfm" addtoken="no" /> 
+	<cflocation url="../index.cfm" /> 
 </cfif>
 <cfinclude template="../section/header.cfm">
 <cfinclude template ="./modal.cfm">
-
 <ORMReload()>
 <cfset contactEntity = entityLoad("adbookcontacts",
 {userId : Session.addressBookCredentials.id})>
@@ -12,7 +11,6 @@
 
 <section class="dashboard">
     <div class="container-2">
-
         <div class="dashboard-topbar flexes">
             <div class="topbar-heading">
                 <p>ADDRESS BOOK CONTACT LIST</p>
@@ -44,16 +42,18 @@
                   <div class="alertSuccess" id="alertSuccess">
                     <cfoutput>
                         <span class="closebtndash" onclick="closeAlertBoxSuccess()">&times</span> 
-                        <p>#aMessageSuccess#</p>
+                        <cfset showMessageSuccess = ToString(ToBinary(aMessageSuccess))>
+                        <p>#showMessageSuccess#</p>
                     </cfoutput>
                   </div>
                 </cfif>
                 <cfif isDefined("aMessages")>
                     <div class="alertClass" id="alertClass">
-                      <cfoutput>
-                        <span class="closebtndash" onclick="closeAlertBox()">&times</span> 
-                          <p>#aMessages#</p>
-                      </cfoutput>
+                        <cfoutput>
+                            <span class="closebtn" onclick="closeAlertBox()">&times</span> 
+                            <cfset showMessage = ToString(ToBinary(aMessages))>
+                            <p>#showMessage#</p>
+                        </cfoutput>
                     </div>
                 </cfif>
                 <table id="detailsTable">
@@ -258,7 +258,7 @@
                                                         <div class="form-control photo">
                                                             <input type="file" name ="photo" 
                                                                 id="photo" placeholder="Upload photo*" 
-                                                                value="#directory.photo#">
+                                                                value="#directory.photo#" accept=".jpeg,.png,.gif,.jpg">
                                                             <input type="hidden" name ="defaultPhoto" 
                                                             id="photo" placeholder="Upload photo*" 
                                                             value="#directory.photo#">

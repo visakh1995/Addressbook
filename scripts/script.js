@@ -28,11 +28,10 @@ function onAddressBookContactValidate(){
   var pinCode = document.getElementById("pinCode").value;
   var street = document.getElementById("street").value;
   var phone = document.getElementById("phone").value;
-  var yes = document.getElementById("yes").value;
-  var no = document.getElementById("no").value;
+  var checks = document.getElementById("checks").value;
 
-  if(title == "" ||  firstName == "" || lastName == "" ||  dob =="" || 
-    photo == "" ||address == "" ||pinCode == "" ||street == "" ||email == "" ||phone == "") {
+  if(title == "" ||  firstName == "" || lastName == "" ||  dob ==""  || photo == "" ||
+  address == "" ||pinCode == "" ||street == "" ||email == "" ||phone == ""|| checks =="") {
       document.getElementById("alert").innerHTML ="Please fill all required fields";
       return false;
     }
@@ -88,6 +87,9 @@ function printTable(divName) {
   document.body.innerHTML = originalContents;
 }
 function closeAlertBox() {
+  document.getElementById("alertClass").style.display="none";
+}
+function closeAlertBoxy() {
   document.getElementById("alertClass").style.display="none";
 }
 function closeAlertBoxes() {
