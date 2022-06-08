@@ -53,17 +53,22 @@ function onAddressBookContactValidate(){
 }
 
 function onAddressBookTriggerContact(){
+  
       // Get the modal
   var modal = document.getElementById("myModal");
   
   // Get the button that opens the modal
   var btn = document.getElementById("myBtn");
+  var btnEdit = document.getElementById("myBtnEdit");
   
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
   
   // When the user clicks the button, open the modal 
   btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  btnEdit.onclick = function() {
     modal.style.display = "block";
   }
   
@@ -98,6 +103,58 @@ function closeAlertBoxes() {
 function closeAlertBoxSuccess() {
   document.getElementById("alertSuccess").style.display="none";
 }
+
+$('.title').on('click',function(){
+  var edit_id=$(this).data('id');
+    if(edit_id > 0){
+       $("#modal_title").text("Update");
+        $.ajax({   
+            url: "../components/userdefined.cfc",
+            type: 'get',
+            dataType:"json",
+            data:{
+            method:"addressBookEdit",
+            edit_id:edit_id              
+            },
+            success: function(data){
+                $('[name="contactId"]').val(data.DATA[0][0]);
+                $('#title').val(data.DATA[0][2]);
+                $('#firstName').val(data.DATA[0][3]);
+                $('#lastName').val(data.DATA[0][4]);
+                // $('#yes').val(data.DATA[0][6]);
+
+                $('#email').val(data.DATA[0][5]);
+                $('#phone').val(data.DATA[0][10]); 
+                $('#street').val(data.DATA[0][11]);  
+                $('#pinCode').val(data.DATA[0][12]); 
+                $('#address').val(data.DATA[0][9]);   
+                $('#dob').val(data.DATA[0][7]);
+                $('#formId').attr('action', '../components/userdefined.cfc?method=addressBookUpdateContactForm');              
+
+            },
+            error:function(data){
+            console.log(data);
+            }
+        });   
+    }else{
+        $('#title').val("");
+        $('#firstName').val("");
+        $('#lastName').val("");
+        // $('#yes').val("");
+        $('#email').val("");
+        $('#phone').val("");
+        $('#street').val("");
+        $('#pinCode').val("");
+        $('#address').val("");
+        $('#dob').val("");
+
+        }  
+    }
+);
+
+
+
+
 
 
 

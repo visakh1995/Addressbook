@@ -1,72 +1,312 @@
-<cfparam  name="user_id" default="v">
-<cfset data=application.obj.printFunc(user_id)>
-<cfinclude  template="master.cfm">
-<body onload="printTable('print_div')">
-    <cfdocument  format="pdf" filename="contact_data.pdf" overwrite="Yes" >        
-            <h3 class="text-center">Contact List</h3> 
-            <div id="print_div">       
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Date Of Birth</th>
-                            <th>Gender</th>
-                            <th>Address</th>
-                            <th>Pincode</th>
-                            <th>Email Id</th>
-                            <th>Phone Number</th>
-                        </tr>
-                    </thead>
-                    <cfoutput query="data">
-                    <tbody>                
-                        <cfset c_name= title & ". " & first_name & " " & last_name>
-                        <cfset address_name= address & ", " & street_name & ", " & city & ", " & state & ", " & nation>
-                        <tr>                    
-                            <td>#c_name#</td>
-                            <td>#dob#</td>
-                            <td>#gender#</td>
-                            <td>#address_name#</td>
-                            <td>#pincode#</td>
-                            <td>#email_id#</td>
-                            <td>#phone_number#</td>
-                        </tr>
-                    </tbody>
-                    </cfoutput>
-                </table>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+    <span class="close">&times;</span>
+        <div class="contact-list">
+            <div class="modal-container ">
+                <div class="modal-head">
+                <h2>Contact Details</h2>
+                <div id="alert"></div>
             </div>
-    </cfdocument>
-    <cfset path =expandPath('.') & '\' &'contact_data.pdf'>
-    <cfprint type="pdf" source="#path#" printer="OneNote (Desktop)">
-     
-    <div id="print_div">       
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Date Of Birth</th>
-                            <th>Gender</th>
-                            <th>Address</th>
-                            <th>Pincode</th>
-                            <th>Email Id</th>
-                            <th>Phone Number</th>
-                        </tr>
-                    </thead>
-                    <cfoutput query="data">
-                    <tbody>                
-                        <cfset c_name= title & ". " & first_name & " " & last_name>
-                        <cfset address_name= address & ", " & street_name & ", " & city & ", " & state & ", " & nation>
-                        <tr>                    
-                            <td>#c_name#</td>
-                            <td>#dob#</td>
-                            <td>#gender#</td>
-                            <td>#address_name#</td>
-                            <td>#pincode#</td>
-                            <td>#email_id#</td>
-                            <td>#phone_number#</td>
-                        </tr>
-                    </tbody>
-                    </cfoutput>
-                </table>
-            </div>
-</body>
-<cfinclude template="footer.cfm">
+            <form class="my-4" method="post" enctype="multipart/form-data" 
+            action="../components/userdefined.cfc?method=addressBookCreateContactForm">
+                <h2>Personal Contact</h2><hr>
+                <div class="modal-body">
+                    <div class="form-control">
+                        <select  class="fullWidth" name = "title" id="title"> 
+                            <option value = "">--- Select ---</option> 
+                            <option value = "Mr">Mr</option> 
+                            <option value = "Mrs">Mrs</option>  
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <input type="text" name ="firstName" required
+                        id ="firstName" placeholder="First name*">
+                    </div>
+                    <div class="form-control">
+                        <input type="text" name ="lastName" required
+                        id ="lastName" placeholder="Last name*">
+                    </div>
+                </div>
+
+                <div class="modal-body-inclusive">
+                    <div class="form-control">
+                        <input class="checkbox1" type="radio"
+                            name="checks" id="yes"
+                        value="Male">Male
+                        <input class="checkbox2" type="radio"
+                            name="checks" id="no"
+                        value="Female">Female
+                    </div>
+                    <div class="form-control dob">
+                        <input type="date" name ="dob" required
+                        id ="dob" placeholder="Dob*">
+                    </div>
+                    <div class="form-control photo">
+                        <input type="file" name ="photo" required
+                        id="photo" placeholder="Upload photo*" 
+                        accept=".jpeg,.png,.gif,.jpg">
+                    </div>
+                </div>
+
+                <h2>Contact Details</h2><hr>
+                <div class="modal-body">
+                    <div class="form-control">
+                        <input type="text" name ="phone" required
+                        id ="phone" placeholder="Phone*">
+                    </div>
+                    <div class="form-control">
+                        <input type="email" name ="email" required
+                        id ="email" placeholder="Email*">
+                    </div>
+                    <div class="form-control">
+                        <input type="text" name ="street" required
+                        id ="street" placeholder="Street*">
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-control">
+                        <input type="text" name ="pinCode" required
+                        id ="pinCode" placeholder="Pincode*">
+                    </div>
+                    <div class="form-control">
+                        <input type="text" name ="address" required
+                        id ="address" placeholder="Address*">
+                    </div>
+                </div>
+                <button class="btn modal-btn"
+                    onclick ="return onAddressBookContactValidate()">Submit
+                </button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+                        <!-- The edit Modal -->
+                        <div class="modal editModal-#directory.id#" >
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="contact-list">
+                                        <div class="modal-container ">
+                                            <div class="modal-head">
+                                            <h2>Contact Details</h2>
+                                            <div id="alert"></div>
+                                        </div>
+                                        <form class="my-4" method="post"
+                                            enctype="multipart/form-data" 
+                                            action="../components/userdefined.cfc?method=addressBookUpdateContactForm">
+                                            <h2>Personal Contact</h2><hr>
+
+                                            <div class="modal-body">
+                                                <div class="form-control">
+                                                    <select  class="fullWidth" name = "title" id="title"> 
+                                                        <option value = "#directory.title#">
+                                                            #directory.title#
+                                                        </option> 
+                                                        <option value = "Mr">Mr</option> 
+                                                        <option value = "Mrs">Mrs</option>  
+                                                        <option value = "Miss">Miss</option> 
+                                                    </select>
+                                                </div>
+                                                <div class="form-control">
+                                                    <input type="text" name ="firstName" 
+                                                        id ="firstName" value="#directory.firstName#"
+                                                        placeholder="First name*">
+                                                    <input type="hidden" name="contactId" 
+                                                        value="#directory.id#">
+                                                </div>
+                                                <div class="form-control">
+                                                    <input type="text" name ="lastName" 
+                                                        id ="lastName" value="#directory.lastName#" 
+                                                        placeholder="Last name*">
+                                                </div>
+                                            </div>
+                            
+                                            <div class="modal-body-inclusive">
+                                                <div class="form-control">
+                                                    <input class="checkbox1" type="radio"
+                                                        name="checks" id="yes" value="Male"
+                                                        <cfif directory.gender eq "Male" >
+                                                        checked</cfif>>Male
+                                                    <input class="checkbox2" type="radio"
+                                                        name="checks" id="no" value="Female"
+                                                        <cfif directory.gender eq "Female" >
+                                                        checked</cfif>>Female
+                                                </div>
+                                                <div class="form-control dob">
+                                                    <input type="date" name ="dob" 
+                                                    id ="dob" placeholder="Dob*" value="#directory.dob#">
+                                                </div>
+                                                <div class="form-control photo">
+                                                    <input type="file" name ="photo" 
+                                                        id="photo" placeholder="Upload photo*" 
+                                                        value="#directory.photo#" accept=".jpeg,.png,.gif,.jpg">
+                                                    <input type="hidden" name ="defaultPhoto" 
+                                                    id="photo" placeholder="Upload photo*" 
+                                                    value="#directory.photo#">
+                                                </div>
+                                                <div class="updateImage">
+                                                    <cfif isDefined("directory.photo")>
+                                                        <img class="avatarupdate-img" src="../uploads/#getFileFromPath(directory.photo)#">
+                                                </cfif>
+                                                </div>
+                                            </div>
+                            
+                                            <h2>Contact Details</h2><hr>
+                                            <div class="modal-body">
+                                                <div class="form-control">
+                                                    <input type="email" name ="email" 
+                                                        id ="email" placeholder="Email*" 
+                                                        value="#directory.email#">
+                                                </div>
+                                                <div class="form-control">
+                                                    <input type="text" name ="phone" 
+                                                        id ="phone" placeholder="Phone*"
+                                                        value="#directory.phone#">
+                                                </div>
+                                                <div class="form-control">
+                                                    <input type="text" name ="street" 
+                                                        id ="street" placeholder="Street*"
+                                                        value="#directory.street#">
+                                                </div>
+                                            </div>
+                            
+                                            <div class="modal-body">
+                                                <div class="form-control">
+                                                    <input type="text" name ="pinCode" 
+                                                        id ="pinCode" placeholder="Pincode*"
+                                                        value="#directory.pinCode#">
+                                                </div>
+                                                <div class="form-control">
+                                                    <input type="text" name ="address" 
+                                                        id ="address" placeholder="Address*"
+                                                        value="#directory.address#" >
+                                                </div>
+                                            </div>
+                                            <button class="btn modal-btn"
+                                            >Update</button>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" 
+                                                data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                                                       <!-- The Modal -->
+                                                       <div class="modal viewModal-#directory.id#" >
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <!-- Modal Header -->
+                                                                <div class="modal-header">
+                                                                    <h4 class="view-modal-title">CONTACT DETAILS</h4>
+                                                                    <button 
+                                                                        type="button" 
+                                                                        class="btn-close" 
+                                                                        data-bs-dismiss="modal">
+                                                                    </button>
+                                                                </div>
+                                                                <!-- Modal body -->
+                                                                <div class="modal-body"> 
+                                                                    <div class="modal-container">
+                                                                        <div class="modal-profile">
+                                                                            <img class="avatarview-img" 
+                                                                            src="../uploads/#getFileFromPath(directory.photo)#">
+                                                                        </div>
+                                                                        <div class="modal-base flex">
+                                                                            <div class="modal-title">
+                                                                                <h4>Name
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                &nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="modal-show">
+                                                                                <h4>#directory.firstName#</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-base flex">
+                                                                            <div class="modal-title">
+                                                                                <h4>checks 
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+                                                                                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                                                            </h4>
+                                                                            </div>
+                                                                            <div class="modal-show">
+                                                                                <h4>#directory.checks#</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-base flex">
+                                                                            <div class="modal-title">
+                                                                                <h4>Dob
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="modal-show">
+                                                                                <h4>#directory.dob#</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-base flex">
+                                                                            <div class="modal-title">
+                                                                                <h4>Pincode
+                                                                                    &nbsp;&nbsp;&nbsp;&nbsp; : &nbsp; 
+                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="modal-show">
+                                                                                <h4>#directory.pinCode#</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-base flex">
+                                                                            <div class="modal-title">
+                                                                                <h4>Email
+                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                    &nbsp;&nbsp;: &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="modal-show">
+                                                                                <h4>#directory.email#</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-base flex">
+                                                                            <div class="modal-title">
+                                                                                <h4>Phone
+                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+                                                                                    &nbsp;&nbsp;&nbsp;&nbsp; 
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="modal-show">
+                                                                                <h4>#directory.phone#</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-base flex">
+                                                                            <div class="modal-title">
+                                                                                <h4>Address 
+                                                                                &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="modal-show">
+                                                                                <h4>#directory.address#</h4>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Modal footer -->
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger" 
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!---view modal ends here  --->

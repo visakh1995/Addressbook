@@ -337,5 +337,14 @@
          </cfquery>
         <cfreturn directoryList>
     </cffunction>
+
+    <cffunction name="addressBookEdit" access="remote" returnFormat = "json">
+        <cfargument name="edit_id" type="string" required="yes">
+        <cfquery name="fetchData">
+            SELECT * FROM coldfusiion.adbookcontacts WHERE 
+            contactId = <cfqueryparam  CFSQLType = "cf_sql_integer" value="#arguments.edit_id#">
+        </cfquery>
+        <cfreturn fetchData> 
+    </cffunction>
     
 </cfcomponent>
