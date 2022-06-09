@@ -173,11 +173,14 @@ section.dashboard {
 table {
     border-collapse: collapse;
     width: 100%;
+    border:1px solid lightgray;
   }
   
 td,th{
     text-align: left;
     padding: 8px;
+    border:1px solid lightgray;
+
 }
 thead {
     font-size: 12px;
@@ -521,6 +524,10 @@ table .avatar-img {
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+}
+.pdfImage{
+    width:60px;
+    height:60px;
 }
 .avatarview-img{
     width: 100px;

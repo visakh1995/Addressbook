@@ -346,5 +346,14 @@
         </cfquery>
         <cfreturn fetchData> 
     </cffunction>
+
+    <cffunction name="getUserByEmail" access="remote"
+        returnFormat = "json" output="false">
+        <cfargument name="userEmail" type="string" required="false"> 
+        <cfquery name="emailVerify" datasource="cruddb">
+            SELECT *FROM coldfusiion.adbookcontacts WHERE email = "#userEmail#";
+        </cfquery>
+        <cfreturn emailVerify.RecordCount>
+    </cffunction>
     
 </cfcomponent>

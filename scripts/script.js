@@ -28,10 +28,10 @@ function onAddressBookContactValidate(){
   var pinCode = document.getElementById("pinCode").value;
   var street = document.getElementById("street").value;
   var phone = document.getElementById("phone").value;
-  var checks = document.getElementById("checks").value;
+  var email = document.getElementById("email").value;
 
   if(title == "" ||  firstName == "" || lastName == "" ||  dob ==""  || photo == "" ||
-  address == "" ||pinCode == "" ||street == "" ||email == "" ||phone == ""|| checks =="") {
+  address == "" ||pinCode == "" ||street == "" ||email == "" ||phone == "") {
       document.getElementById("alert").innerHTML ="Please fill all required fields";
       return false;
     }
@@ -53,7 +53,6 @@ function onAddressBookContactValidate(){
 }
 
 function onAddressBookTriggerContact(){
-  
       // Get the modal
   var modal = document.getElementById("myModal");
   
@@ -71,12 +70,10 @@ function onAddressBookTriggerContact(){
   btnEdit.onclick = function() {
     modal.style.display = "block";
   }
-  
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = "none";
   }
-  
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
@@ -91,66 +88,98 @@ function printTable(divName) {
   window.print();   
   document.body.innerHTML = originalContents;
 }
+
 function closeAlertBox() {
   document.getElementById("alertClass").style.display="none";
 }
+
 function closeAlertBoxy() {
   document.getElementById("alertClass").style.display="none";
 }
+
 function closeAlertBoxes() {
   document.getElementById("alert").style.display="none";
 }
+
 function closeAlertBoxSuccess() {
   document.getElementById("alertSuccess").style.display="none";
 }
 
 $('.title').on('click',function(){
   var edit_id=$(this).data('id');
-    if(edit_id > 0){
-       $("#modal_title").text("Update");
-        $.ajax({   
-            url: "../components/userdefined.cfc",
-            type: 'get',
-            dataType:"json",
-            data:{
-            method:"addressBookEdit",
-            edit_id:edit_id              
-            },
-            success: function(data){
-                $('[name="contactId"]').val(data.DATA[0][0]);
-                $('#title').val(data.DATA[0][2]);
-                $('#firstName').val(data.DATA[0][3]);
-                $('#lastName').val(data.DATA[0][4]);
-                // $('#yes').val(data.DATA[0][6]);
+  if(edit_id > 0){
+    $("#modal_title").text("Update");
+      $.ajax({   
+        url: "../components/userdefined.cfc",
+        type: 'get',
+        dataType:"json",
+        data:{
+        method:"addressBookEdit",
+        edit_id:edit_id              
+        },
+        success: function(data){
+          $('[name="contactId"]').val(data.DATA[0][0]);
+          $('#title').val(data.DATA[0][2]);
+          $('#firstName').val(data.DATA[0][3]);
+          $('#lastName').val(data.DATA[0][4]);
+          $('#email').val(data.DATA[0][5]);
+          $('#phone').val(data.DATA[0][10]); 
+          $('#street').val(data.DATA[0][11]);  
+          $('#pinCode').val(data.DATA[0][12]); 
+          $('#address').val(data.DATA[0][9]);   
+          $('#dob').val(data.DATA[0][7]);
+          $('#formId').attr('action', '../components/userdefined.cfc?method=addressBookUpdateContactForm'); 
+          $('[name="defaultPhoto"]').val(data.DATA[0][8]);
 
-                $('#email').val(data.DATA[0][5]);
-                $('#phone').val(data.DATA[0][10]); 
-                $('#street').val(data.DATA[0][11]);  
-                $('#pinCode').val(data.DATA[0][12]); 
-                $('#address').val(data.DATA[0][9]);   
-                $('#dob').val(data.DATA[0][7]);
-                $('#formId').attr('action', '../components/userdefined.cfc?method=addressBookUpdateContactForm');              
-
-            },
-            error:function(data){
-            console.log(data);
-            }
-        });   
-    }else{
-        $('#title').val("");
-        $('#firstName').val("");
-        $('#lastName').val("");
-        // $('#yes').val("");
-        $('#email').val("");
-        $('#phone').val("");
-        $('#street').val("");
-        $('#pinCode').val("");
-        $('#address').val("");
-        $('#dob').val("");
-
-        }  
-    }
+          var gender = data.DATA[0][6];
+          if(gender == "Male") {
+            document.getElementById("gender1").checked = true;  
+            }else{
+            document.getElementById("gender2").checked = true;  
+          } 
+        },
+        error:function(data){
+        console.log(data);
+        }
+      });   
+  }else{
+      $('#title').val("");
+      $('#firstName').val("");
+      $('#lastName').val("");
+      // $('#yes').val("");
+      $('#email').val("");
+      $('#phone').val("");
+      $('#street').val("");
+      $('#pinCode').val("");
+      $('#address').val("");
+      $('#dob').val("");
+      $('#formId').attr('action', '../components/userdefined.cfc?method=addressBookCreateContactForm'); 
+    }  
+  }
 );
+
+function onValidateEmail() {
+  $("body").on('change', '#email', function() {
+      var selectedValue = $(this).val();
+          $.ajax({
+          url: '../components/userDefined.cfc',
+          type: 'get',
+          dataType: "json",
+          data: {
+          method: "getUserByEmail",
+          userEmail: selectedValue
+          },
+          success: function (data){
+              if(data != 0){
+                document.getElementById("alert").innerHTML ="The email id already exist,please try again";
+              }
+          }, 
+          error: function (xhr, textStatus, errorThrown){
+              console.log(xhr);
+          }
+      });
+  });
+}
 
 
 

@@ -3,7 +3,9 @@
     <div class="container grid">
         <div class="addressbook-form card flex">
             <div class="addressbook-sidebar-login">
-                <span class="sidebar-logo"><i class="fa-solid fa-address-book"></i></span>
+                <span class="sidebar-logo">
+                    <i class="fa-solid fa-address-book"></i>
+                </span>
             </div>
             <div class="addressbook-form-fields">
                 <div id="alert"></div>
