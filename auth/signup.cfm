@@ -14,7 +14,6 @@
                     <cfif isDefined("aMessages")>
                         <div class="alertClass">
                             <cfoutput>
-                                <span class="closebtn" onclick="closeAlertBox()">&times</span> 
                                 <cfset showMessage = ToString(ToBinary(aMessages))>
                                 <p>#showMessage#</p>
                             </cfoutput>
@@ -33,7 +32,7 @@
                     </div>
                     <div class="form-control">
                         <input type="email" name ="emailId" id ="emailId"
-                        placeholder="Email">
+                        placeholder="Email" onclick ="return onValidateEmail()">
                     </div>
                     <div class="form-control">
                         <input type="text" name ="userName" id ="userName"

@@ -49,15 +49,56 @@
         access="public"
         returnType="void"
         output="false"
-        hint ="request start">
+        hint="Fires at first part of page processing.">
+
+        <cfargument
+            name="targetPage"
+            type="string"
+            required="true"
+		/>
+        <cfscript>
+            if(!structKeyExists(Session, "addressBookCredentials")){
+                if(findNoCase("/ADDRESSBOOK/pages/dashboard.cfm",arguments.targetPage) > 0 ||
+                findNoCase("/ADDRESSBOOK/pages/generateExcel.cfm",arguments.targetPage) > 0 ||
+                findNoCase("/ADDRESSBOOK/pages/modal.cfm",arguments.targetPage) > 0 ||
+                findNoCase("/ADDRESSBOOK/pages/print.cfm",arguments.targetPage) > 0 ){
+                    writeOutput('<center><h1>Login Required</h1>
+                    <p>Please Login to yout account</p><br>
+                    <a href="../index.cfm">Click Here</a></center>');
+                abort;
+                }
+            }
+        </cfscript>
     </cffunction>
 
+    <cffunction name="onError">
+        <cfargument name="Exception" required=true/>
+        <cfargument type="String" name="EventName" required=true/>
+        <cfscript>
+            writeOutput('<center><h1>An error occurred</h1>
+            <p>Please Contact the developer</p>
+            <p>Error details: #Exception.message#</p></center>');
+        </cfscript>
+    </cffunction>
+
+    <cffunction name="onMissingTemplate">
+        <cfargument
+            name="targetPage"
+            type="string"
+            required="true"
+		/>
+        <cfscript>
+            writeOutput('<center><h1>This Page is not avilable.</h1>
+                <p>Please go back:</p></center>');
+        </cfscript>
+    </cffunction>
+    
     <cffunction 
         name="OnRequestEnd"
         access="public"
         returnType="void"
         output="false"
-        hint ="request end">
+        hint="Fires after the page processing is complete.">
     </cffunction>
 
     <cffunction 
@@ -65,7 +106,16 @@
         access="public"
         returnType="void"
         output="false"
-        hint ="session end">
+        hint="Fires when the session is terminated.">
+
+        <cfargument name="sessionScope" required=true/>
+        <cfargument type="String" name="applicationScope" required=true/>
+        <cfscript>
+            writeOutput('<center>
+                <h1>Your session expired. Please login again</h1>
+                <a href="index.cfm">Click Here</a>
+                </center>');
+        </cfscript>
     </cffunction>
 
     <cffunction 
@@ -73,7 +123,8 @@
         access="public"
         returnType="void"
         output="false"
-        hint ="application end">
+        hint="Fires when the application is terminated.">
+ 
     </cffunction>
 
 </cfcomponent>

@@ -30,7 +30,7 @@ function onAddressBookContactValidate(){
   var phone = document.getElementById("phone").value;
   var email = document.getElementById("email").value;
 
-  if(title == "" ||  firstName == "" || lastName == "" ||  dob ==""  || photo == "" ||
+  if(title == "" ||  firstName == "" || lastName == "" ||  dob ==""  || 
   address == "" ||pinCode == "" ||street == "" ||email == "" ||phone == "") {
       document.getElementById("alert").innerHTML ="Please fill all required fields";
       return false;

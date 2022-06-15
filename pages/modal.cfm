@@ -51,7 +51,7 @@
                                 id="photo" placeholder="Upload photo*" 
                                 accept=".jpeg,.png,.gif,.jpg" >
                                 <input type="hidden" name ="defaultPhoto" 
-                                id="photo" placeholder="Upload photo*">
+                                id="defaultPhoto" placeholder="Upload photo*">
                             </div>
                         </div>
 

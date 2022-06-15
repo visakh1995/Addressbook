@@ -1,6 +1,3 @@
-<cfif NOT isDefined("Session.addressBookCredentials")>
-	<cflocation url="../index.cfm" /> 
-</cfif>
 <cfinclude template="../section/header.cfm">
 <cfinclude template ="./modal.cfm"> 
 <ORMReload()>
