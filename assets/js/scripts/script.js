@@ -146,7 +146,6 @@ $('.title').on('click',function(){
       $('#title').val("");
       $('#firstName').val("");
       $('#lastName').val("");
-      // $('#yes').val("");
       $('#email').val("");
       $('#phone').val("");
       $('#street').val("");

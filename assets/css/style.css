@@ -1,0 +1,591 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-family: "Lato", sans-serif;
+    color:#333;
+    line-height:1.6;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: #333;
+}
+h1,h2{
+    margin:10px 0;
+    font-weight:300;
+    line-height: 1.2;
+}
+p{
+    margin: 10px 0;
+}
+img{
+    width:100%;
+}
+
+/* navbar */
+.navbar {
+    background-color: #047ade;
+    height:70px;
+    color:#fff;
+}
+.navbar ul{
+    display :flex;
+}
+.navbar a {
+    color : #fff;
+    padding:10px;
+}
+.navbar a:hover {
+    border-bottom: 2px solid #fff;
+}
+.navbar .flex{
+    justify-content: space-between;
+}
+
+/* addressbook-signup */
+.addressbook{
+    position:absolue;
+    background-color:#047ade;
+    color:#fff;
+}
+.addressbook-form{
+    top: -20px;
+    max-height: 500px;
+    width:610px;
+    padding:10px;
+    z-index:100;
+}
+.addressbook-form.signup.card {
+    min-height: 610px;
+    width:670px;
+}
+.addressbook-form h1{
+    font-size: 20px;
+    text-align: center;
+    font-weight: 900;
+    color: #047ade;
+    letter-spacing: 1px;
+}
+.addressbook-form p{
+    padding:5px 0;
+    text-align: center;
+    font-size: small;
+}
+.addressbook-form .form-control {
+    padding:30px 0;
+}
+.addressbook-form input[type="text"],[type="password"],[type="email"]{
+    border:0;
+    border-bottom: 1px solid #b4becb;
+    width:100%;
+    padding:3px;
+    font-size: 16px;
+}
+.addressbook-form input:focus {
+    outline: none;
+}
+.addressbook-sidebar{
+    background-color: #5286b3;
+    height:500px;
+    width:200px;
+}
+.addressbook-sidebar-login{
+    background-color: #5286b3;
+    height:400px;
+    width:200px;
+}
+.addressbook-sidebar-signup{
+    background-color: #5286b3;
+    height:400px;
+    width:200px;
+}
+.addressbook .flex{
+    display:flex;
+    justify-content: space-evenly;
+}
+.addressbook-form-footer{
+    text-align: center;
+    margin-top: 45px;
+}
+.addressbook-form-footer .o-auth{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.addressbook-sidebar-login .sidebar-logo{
+    position: absolute;
+    font-size: 52px;
+    margin-top: 160px;
+    margin-left: 74px;
+    color: #fff;
+}
+.signup-title{
+    padding-top: 30px;
+    text-align: left;
+}
+h1.signup-title {
+    text-align: left;
+}
+/* dashboard */
+section.dashboard {
+    background: #b4acbe;
+    height: 100%;
+}
+.dashboard-topbar{
+    height:60px;
+    background-color:#fff
+}
+.dashboard .grid-2 {
+    overflow: visible;
+    grid-template-columns: 20% 80%;
+    gap: 30px;
+  }
+.panel-profile{
+    height:200px;
+    background-color:#fff;
+    border-radius: 6px;
+}
+.panel-list{
+    min-height:300px;
+    background-color:#fff;
+    border-radius: 6px;
+}
+.panel-list.card {
+    max-height: 400px;
+}
+.topbar-docs {
+    position: absolute;
+    right: 152px;
+    padding: 28px;
+    font-size: 24px;
+}
+.topbar-heading p{
+    font-weight: 400;
+}
+
+/* table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border:1px solid lightgray;
+  }
+  
+td,th{
+    text-align: left;
+    padding: 8px;
+    border:1px solid lightgray;
+
+}
+thead {
+    font-size: 12px;
+    color: #047ade;
+}
+  
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+.avatar {
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+}
+/* contact */
+.modal-head{
+    text-align: center;
+}
+.modal-body{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-body-inclusive{
+    display:flex;
+    justify-content:space-evenly;
+    align-items: center;
+}
+.modal-body-bon{
+    display:flex;
+    justify-content: flex-start;
+}
+.modal-body h1{
+    font-size: 20px;
+    text-align: center;
+    font-weight:500;
+}
+.modal-body p{
+    padding:5px 0;
+    text-align: center;
+    font-size: small;
+}
+.modal-body .form-control {
+    padding:30px 0;
+}
+.modal-body input[type="text"],[type="email"],[type="date"]{
+    border:0;
+    border-bottom: 1px solid #b4becb;
+    width:89%;
+    padding:3px;
+    font-size: 16px;
+}
+.modal-body-inclusive input[type="text"]{
+    border:0;
+    border-bottom: 1px solid #b4becb;
+    width:80%;
+    padding:3px;
+    font-size: 16px;
+}
+.modal-body input:focus,.modal-body-inclusive input:focus {
+    outline: none;
+}
+.modal-btn{
+    overflow: visible;
+    margin-top: 45px;
+    margin-left: 250px;
+}
+.modal-body-bon input:focus {
+    outline: none;
+}
+.fullWidth{
+    border:0;
+    border-bottom: 1px solid #b4becb;
+    width:80%;
+    padding:3px;
+    font-size: 16px;
+    margin-right: 88px;
+}
+.fullWidth:focus{
+    outline:none;
+}
+/* view modal */
+h4.view-modal-title {
+    text-align: center;
+    background-color: #047ade;
+    padding: 20px;
+    color: #fff;
+}
+.modal-titles p{
+    font-size: 15px;;
+}
+.modal-container .flex{
+    justify-content:flex-start;
+    padding: 10px;
+}
+
+/* uttilities */
+.container{
+    max-width: 1100px;
+    margin:0 auto;
+    padding:0 40px;
+}
+.container-2{
+    max-width: 1200px;
+    margin:0 auto;
+    padding:0 40px;
+}
+.flex{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.flexes{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 8%;
+}
+.card{
+    border-radius: 5px;
+    background: #fff;
+    color:#000;
+    padding:40px;
+    margin:10px;
+    position: relative;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+.card2{
+    border-radius: 5px;
+    background: #fff;
+    color:#000;
+    padding:10px;
+    margin:10px;
+    position: relative;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+.card3{
+    border-radius: 5px;
+    background: #fff;
+    color:#000;
+    padding:10px;
+    margin:10px;
+    position: relative;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+.grid {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.grids {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    /* show case height is there,grid height inside max set to 100% */
+  }
+.btn {
+    display: inline-block;
+    padding: 10px 30px;
+    cursor: ponter;
+    background:#047ade;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+.btn:hover {
+    transform: scale(0.98);
+}
+button.btn.btn-outline.btn-show {
+    padding: 5px 20px;
+}
+.btn-outline {
+    background-color: transparent;
+    border: 1px #047ade solid;
+    color:#000;
+}
+button.btn.btn-login{
+    margin-left: 48px;
+    margin-top: 20px;
+    color:#047ade;
+    padding: 5px 43px;
+}
+button.btn.btn-signup{
+    margin-left: 40px;
+    margin-top: 10px;
+    color:#047ade;
+    padding: 5px 43px;
+}
+#alert{
+    background-color: red;
+    border-radius:5px;
+    color:#fff;
+    font-size:16px;
+    text-align:center;
+}
+.alertClass{
+    background-color: red;
+    border-radius:5px;
+    color:#fff;
+    font-size:16px;
+    text-align:center;
+    font-weight:900;
+}
+.alertClassed{
+    background-color: red;
+    border-radius:5px;
+    color:#fff;
+    font-size:16px;
+    text-align:center;
+    font-weight:900;
+}
+.alertSuccess{
+    background-color:green;
+    border-radius:5px;
+    color:#fff;
+    font-size:16px;
+    text-align:center;
+    font-weight:900;
+}
+span.google{
+    padding: 8px;
+    font-size: 22px;
+}
+span.facebook{
+    font-size: 22px;
+}
+/* margin */
+.my-1{
+    margin: 1rem 0;
+}
+.my-2{
+    margin: 1.5rem 0;
+}
+.my-3{
+    margin: 2rem 0;
+}
+.my-4{
+    margin: 3rem 0;
+}
+.my-5{
+    margin: 4rem 0;
+}
+
+  /* margin */
+  
+.m-1{
+    /* rem is default 16px   1 rem 1*16px */
+    margin: 1rem 0;
+}
+.m-2{
+    margin: 1.5rem 0;
+}
+.m-3{
+    margin: 2rem 0;
+}
+.m-4{
+    margin: 3rem 0;
+}
+.m-5{
+    margin: 4rem 0;
+}
+
+/* padding */
+
+.py-1{
+    padding: 1rem 0;
+}
+.py-2{
+    padding: 1.5rem 0;
+}
+.py-3{
+    padding: 2rem 0;
+}
+.py-4{
+    padding: 3rem 0;
+}
+.py-5{
+    padding: 4rem 0;
+}
+/* margin */
+  
+.p-1{
+    padding: 1rem 0;
+}
+.p-2{
+    padding: 1.5rem 0;
+}
+.p-3{
+    padding: 2rem 0;
+}
+.p-4{
+    padding: 3rem 0;
+}
+.p-5{
+    padding: 4rem 0;
+}
+
+/* modal */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 30px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height *//* Enable scroll if needed */
+    overflow: auto; 
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+  /* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+  
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+table .avatar-img {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.pdfImage{
+    width:60px;
+    height:60px;
+}
+.avatarview-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    margin-left: 58px;
+}
+.avatarUpdate-img {
+    width: 57px;
+    height: 56px;
+    margin-left: -89px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+}
+.profile-name{
+    text-align: center;
+}
+.closebtn {
+    /* margin-right: 5px; */
+    padding:7px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+}
+.closebtndash {
+    margin-right: 5px;
+    margin-bottom: 4px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+}
+.closebtns {
+    margin-right: 7px;
+    margin-top: 4px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+}
+.closebtn:hover {
+    color: black;
+}

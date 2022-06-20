@@ -3,7 +3,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link href="../assets/css/style.css" rel="stylesheet" />
         <link href="../assets/css/fontawesome/css/all.css" rel="stylesheet" />
     </head>
     <body>

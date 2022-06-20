@@ -30,16 +30,14 @@
                         </div>
                       </cfif>
                     <div class="form-control">
-                        <input type="text" name ="userName" id ="userName" 
+                        <input type="text" name ="userName" id="userName" 
                         placeholder="Username" required>
                     </div>
                     <div class="form-control">
-                        <input type="password" name ="password" id ="password" 
+                        <input type="password" name ="password" id="password" 
                         placeholder="Password" required>
                     </div>
-                    <button class="btn btn-outline btn-login" type="submit"
-                        onclick ="return onAddressBookLoginValidate()">Login
-                    </button>
+                    <button class="btn btn-outline btn-login" type="submit">Login</button>
                     <div class="addressbook-form-footer">
                         <h5>Or Sign In Using</h5>
                         <div class="o-auth">

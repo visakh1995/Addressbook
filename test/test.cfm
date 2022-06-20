@@ -310,3 +310,5 @@
                                                         </div>
                                                     </div>
                                                     <!---view modal ends here  --->
+
+                                                    onclick ="return onValidateEmail()"

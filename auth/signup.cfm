@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-control">
                         <input type="email" name ="emailId" id ="emailId"
-                        placeholder="Email" onclick ="return onValidateEmail()">
+                        placeholder="Email">
                     </div>
                     <div class="form-control">
                         <input type="text" name ="userName" id ="userName"
