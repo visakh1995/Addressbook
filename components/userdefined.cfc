@@ -355,5 +355,24 @@
         </cfquery>
         <cfreturn emailVerify.RecordCount>
     </cffunction>
+
+    <cffunction  name="getUserName" access="remote" returnFormat="json">
+        <cfargument name ="userName" type="string" required="false">
+        <cfquery name="findUserName" result="userNameFinding">
+            SELECT *FROM coldfusiion.addressbook_register 
+            WHERE userName = <cfqueryparam value="#arguments.userName#" CFSQLType = "cf_sql_varchar">
+        </cfquery>
+        <cfreturn userNameFinding>
+    </cffunction>
+
+    <cffunction name="getUserEmailId" access="remote" returnFormat = "json">
+        <cfargument name="emailId" type="string" required="false"> 
+        <cfquery name="InstantemailVerify" result="uniqueEmailFinding">
+            SELECT *FROM coldfusiion.addressbook_register 
+            WHERE emailId =<cfqueryparam value="#arguments.emailId#" CFSQLType = "cf_sql_varchar"> 
+        </cfquery>
+        <cfreturn uniqueEmailFinding>
+    </cffunction>
+
     
 </cfcomponent>

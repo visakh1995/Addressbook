@@ -417,6 +417,15 @@ span.google{
 span.facebook{
     font-size: 22px;
 }
+.signup_username{
+    color:red;
+}
+.signup_email{
+    color:red;
+}
+.signup_confirm{
+    color:red;
+}
 /* margin */
 .my-1{
     margin: 1rem 0;
